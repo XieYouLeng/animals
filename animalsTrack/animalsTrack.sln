@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30309.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "animalsTrack", "animalsTrack\animalsTrack.csproj", "{60CF49D1-AEC6-4830-A0F8-06B288A42F4B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60CF49D1-AEC6-4830-A0F8-06B288A42F4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60CF49D1-AEC6-4830-A0F8-06B288A42F4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60CF49D1-AEC6-4830-A0F8-06B288A42F4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60CF49D1-AEC6-4830-A0F8-06B288A42F4B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67BF2DC0-7654-4852-8346-C598EE44CEBB}
+	EndGlobalSection
+EndGlobal
