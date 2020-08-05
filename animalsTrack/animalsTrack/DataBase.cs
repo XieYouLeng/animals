@@ -12,6 +12,32 @@ namespace animalsTrack
     class DataBase
     {
         String db_connect { get { return "server=140.130.35.236;uid=usblab;pwd=usblab603;database=animals_tracks;"; } } //server、帳號、密碼、資料庫
+        
+        //選擇的日期
+        public void GetSelectData(String time)
+        {
+            //string test = time + " 23:59:59";
+            string test = "%" + time + "%";
+            using ( MySqlConnection conn = new MySqlConnection(db_connect))
+            {
+                conn.Open();
+
+                //第一種完整sql語法
+                //SELECT * FROM `coordinates` WHERE `DateTime` LIKE "%2020-07-29(帶你的參數)%"
+                string sql_command = "SELECT * FROM `coordinates` WHERE `DateTime` LIKE @DateTime";
+                var result = conn.Query(sql_command, new { DateTime = test }).ToList();
+
+                //第二種
+                //SELECT * FROM `coordinates` WHERE `DateTime` BETWEEN "2020-07-29(帶你的參數)" AND "2020-07-29 23:59:59(帶你改過後的參數!!)"
+                //string sql_command = "SELECT * FROM `coordinates` WHERE `DateTime` BETWEEN @DateTime AND @DateTime_END;";
+                //var result1 = conn.Query(sql_command1).ToList();
+                //var result = conn.Query(sql_command, new { DateTime = time, DateTime_END = test }).ToList();
+
+                conn.Close();
+            }
+        }
+
+
         public void getAllData()
         {
             using (MySqlConnection conn = new MySqlConnection(db_connect))
