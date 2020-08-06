@@ -15,9 +15,15 @@ namespace animalsTrack
     {
         DataBase dataBase = new DataBase();
         WebFunction webFunction = new WebFunction();
+
         public Form1()
         {
             InitializeComponent();
+
+            String dateTime = Dtp_dateTime.Value.ToString("yyyy-MM-dd");
+            label1.Text = dateTime;
+            Console.WriteLine(dateTime);
+            dataBase.GetSelectData(dateTime);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -32,19 +38,13 @@ namespace animalsTrack
             String dateTime = Dtp_dateTime.Value.ToString("yyyy-MM-dd");
             label1.Text = dateTime;
             dataBase.GetSelectData(dateTime);
-            
-
-
         }
+
+       
 
         private void Btn_cancel_Click(object sender, EventArgs e)
         {
             
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //webFunction.DrawLinePoint();
         }
     }
 }

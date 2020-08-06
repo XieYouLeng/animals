@@ -34,7 +34,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.Btn_cancel = new System.Windows.Forms.Button();
             this.Pic_track = new System.Windows.Forms.PictureBox();
-            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_track)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +50,7 @@
             // 
             // Dtp_dateTime
             // 
-            this.Dtp_dateTime.CustomFormat = "yyyy-MM-dd";
+            this.Dtp_dateTime.CustomFormat = " ";
             this.Dtp_dateTime.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Dtp_dateTime.Location = new System.Drawing.Point(666, 43);
             this.Dtp_dateTime.Name = "Dtp_dateTime";
@@ -71,16 +70,14 @@
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(704, 258);
+            this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 15);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 23);
+            this.label2.TabIndex = 8;
             // 
             // Btn_cancel
             // 
-            this.Btn_cancel.Location = new System.Drawing.Point(707, 345);
+            this.Btn_cancel.Location = new System.Drawing.Point(666, 450);
             this.Btn_cancel.Name = "Btn_cancel";
             this.Btn_cancel.Size = new System.Drawing.Size(75, 23);
             this.Btn_cancel.TabIndex = 5;
@@ -96,22 +93,11 @@
             this.Pic_track.TabIndex = 6;
             this.Pic_track.TabStop = false;
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(940, 328);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 562);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.Pic_track);
             this.Controls.Add(this.Btn_cancel);
             this.Controls.Add(this.label2);
@@ -135,7 +121,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button Btn_cancel;
         private System.Windows.Forms.PictureBox Pic_track;
-        private System.Windows.Forms.Button button2;
     }
 }
 
