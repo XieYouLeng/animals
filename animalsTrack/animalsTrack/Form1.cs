@@ -20,10 +20,9 @@ namespace animalsTrack
         {
             InitializeComponent();
 
+            //處理DateTimePicker會有預設值的問題
             String dateTime = Dtp_dateTime.Value.ToString("yyyy-MM-dd");
-            label1.Text = dateTime;
-            Console.WriteLine(dateTime);
-            dataBase.GetSelectData(dateTime);
+            List<Data.coordinates> result = dataBase.GetSelectData(dateTime);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -33,18 +32,20 @@ namespace animalsTrack
 
         //選擇日期抓出資料庫的東西
         private void Dtp_dateTime_ValueChanged(object sender, EventArgs e)
-        {
-            List<Form1> ts = new List<Form1>();
+        { 
             String dateTime = Dtp_dateTime.Value.ToString("yyyy-MM-dd");
             label1.Text = dateTime;
-            dataBase.GetSelectData(dateTime);
+            List<Data.coordinates> result = dataBase.GetSelectData(dateTime);
         }
-
-       
 
         private void Btn_cancel_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Cbo_selectID.Items.Add("1"); //新增選項
         }
     }
 }

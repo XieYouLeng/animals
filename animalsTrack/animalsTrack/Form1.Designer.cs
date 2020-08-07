@@ -34,12 +34,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.Btn_cancel = new System.Windows.Forms.Button();
             this.Pic_track = new System.Windows.Forms.PictureBox();
+            this.Cbo_selectID = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_track)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(940, 40);
+            this.button1.Location = new System.Drawing.Point(937, 24);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 29);
@@ -52,7 +53,7 @@
             // 
             this.Dtp_dateTime.CustomFormat = " ";
             this.Dtp_dateTime.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Dtp_dateTime.Location = new System.Drawing.Point(666, 43);
+            this.Dtp_dateTime.Location = new System.Drawing.Point(541, 44);
             this.Dtp_dateTime.Name = "Dtp_dateTime";
             this.Dtp_dateTime.Size = new System.Drawing.Size(200, 25);
             this.Dtp_dateTime.TabIndex = 1;
@@ -62,7 +63,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(713, 135);
+            this.label1.Location = new System.Drawing.Point(552, 166);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 15);
             this.label1.TabIndex = 3;
@@ -93,11 +94,20 @@
             this.Pic_track.TabIndex = 6;
             this.Pic_track.TabStop = false;
             // 
+            // Cbo_selectID
+            // 
+            this.Cbo_selectID.FormattingEnabled = true;
+            this.Cbo_selectID.Location = new System.Drawing.Point(771, 48);
+            this.Cbo_selectID.Name = "Cbo_selectID";
+            this.Cbo_selectID.Size = new System.Drawing.Size(121, 23);
+            this.Cbo_selectID.TabIndex = 10;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 562);
+            this.Controls.Add(this.Cbo_selectID);
             this.Controls.Add(this.Pic_track);
             this.Controls.Add(this.Btn_cancel);
             this.Controls.Add(this.label2);
@@ -106,7 +116,8 @@
             this.Controls.Add(this.button1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "可彈性擴充之動物行為量測系統-動物實驗結果";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Pic_track)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -121,6 +132,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button Btn_cancel;
         private System.Windows.Forms.PictureBox Pic_track;
+        private System.Windows.Forms.ComboBox Cbo_selectID;
     }
 }
 
