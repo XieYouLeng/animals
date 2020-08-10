@@ -17,7 +17,7 @@ namespace animalsTrack
         DataBase dataBase = new DataBase();
         WebFunction webFunction = new WebFunction();
         private int[] id;
-        //private List<Data.coordinates> result = new List<Data.coordinates>;
+        private List<Data.coordinates> result = new List<Data.coordinates>();
 
         public Form1()
         {
@@ -39,19 +39,36 @@ namespace animalsTrack
         { 
             String dateTime = Dtp_dateTime.Value.ToString("yyyy-MM-dd");
             label1.Text = dateTime;
-            List<Data.coordinates> result = dataBase.GetSelectData(dateTime);
+            result = dataBase.GetSelectData(dateTime);
             //Cbo_selectID.Items.Add(id); //新增選項
             id = new int[result.Count];
             for (int i = 0; i < result.Count; i++)
             {
                 id[i] = result[i].ID;
-                Cbo_selectID.Items.Add(id[i]);
+                if (Cbo_selectID.Items.Contains(id[i]) == true)
+                {
+
+                }
+                else
+                {
+                    Cbo_selectID.Items.Add(id[i]); //傳入ComboBox
+                }
             }
         }
 
+        //選擇ID抓出相符的資料
         private void Cbo_selectID_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            string id = this.Cbo_selectID.Text;
+            int ID = 0;
+            int.TryParse(id, out ID);
+            for (int i = 0; i < result.Count; i++)
+            {
+                if (result[i].ID == ID)
+                {
+                    
+                }
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)

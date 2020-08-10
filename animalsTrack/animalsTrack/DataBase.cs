@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Asn1.Cms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,12 +14,12 @@ namespace animalsTrack
     class DataBase
     {
         String db_connect { get { return "server=140.130.35.236;uid=usblab;pwd=usblab603;database=animals_tracks;"; } } //server、帳號、密碼、資料庫
-        
+        String dataTime;
         //選擇的日期與資料庫的做比較
-        public List<animalsTrack.Data.coordinates> GetSelectData(String time)
+        public List<Data.coordinates> GetSelectData(String time)
         {
             //string test = "%" + time + "%";
-            string test = time + " 23:59:59";
+            dataTime = time + " 23:59:59";
             List<Data.coordinates> result = null;
             using ( MySqlConnection conn = new MySqlConnection(db_connect))
             {
@@ -31,8 +32,8 @@ namespace animalsTrack
 
                 //第二種
                 //SELECT * FROM `coordinates` WHERE `DateTime` BETWEEN "2020-07-29(帶你的參數)" AND "2020-07-29 23:59:59(帶你改過後的參數!!)"
-                string sql_command = "select * from `coordinates` where `datetime` between @datetime and @datetime_end;";
-                result = conn.Query<Data.coordinates>(sql_command, new { datetime = time, datetime_end = test }).ToList();
+                string sql_command = "select * from `coordinates` where `Datetime` between @datetime and @datetime_end;";
+                result = conn.Query<Data.coordinates>(sql_command, new { datetime = time, datetime_end = dataTime }).ToList();
 
                 conn.Close();
             }
@@ -40,7 +41,16 @@ namespace animalsTrack
             return result;
         }
 
-        
+        //public void GetSelectID()
+        //{
+            
+        //    using ( MySqlConnection conn = new MySqlConnection(db_connect))
+        //    {
+        //        conn.Open();
+        //        string sql_command = "SELECT * FROM `coordinates` WHERE `DateTime` between @dateTime and @date"
+        //    }
+        //}
+
         public void getAllData()
         {
             using (MySqlConnection conn = new MySqlConnection(db_connect))
