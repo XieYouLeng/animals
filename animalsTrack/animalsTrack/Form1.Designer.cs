@@ -101,6 +101,7 @@
             this.Cbo_selectID.Name = "Cbo_selectID";
             this.Cbo_selectID.Size = new System.Drawing.Size(121, 23);
             this.Cbo_selectID.TabIndex = 10;
+            this.Cbo_selectID.SelectedIndexChanged += new System.EventHandler(this.Cbo_selectID_SelectedIndexChanged);
             // 
             // Form1
             // 
