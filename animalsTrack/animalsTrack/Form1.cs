@@ -45,6 +45,7 @@ namespace animalsTrack
             for (int i = 0; i < result.Count; i++)
             {
                 id[i] = result[i].ID;
+                //防止重複ID
                 if (Cbo_selectID.Items.Contains(id[i]) == true)
                 {
 
@@ -67,6 +68,9 @@ namespace animalsTrack
                 if (result[i].ID == ID)
                 {
                     
+                }else
+                {
+
                 }
             }
         }

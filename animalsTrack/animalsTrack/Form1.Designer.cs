@@ -35,6 +35,8 @@
             this.Btn_cancel = new System.Windows.Forms.Button();
             this.Pic_track = new System.Windows.Forms.PictureBox();
             this.Cbo_selectID = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_track)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,7 +55,7 @@
             // 
             this.Dtp_dateTime.CustomFormat = " ";
             this.Dtp_dateTime.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Dtp_dateTime.Location = new System.Drawing.Point(541, 44);
+            this.Dtp_dateTime.Location = new System.Drawing.Point(541, 69);
             this.Dtp_dateTime.Name = "Dtp_dateTime";
             this.Dtp_dateTime.Size = new System.Drawing.Size(200, 25);
             this.Dtp_dateTime.TabIndex = 1;
@@ -63,7 +65,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(552, 166);
+            this.label1.Location = new System.Drawing.Point(577, 174);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 15);
             this.label1.TabIndex = 3;
@@ -88,26 +90,47 @@
             // 
             // Pic_track
             // 
-            this.Pic_track.Location = new System.Drawing.Point(137, 107);
+            this.Pic_track.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Pic_track.Location = new System.Drawing.Point(12, 26);
             this.Pic_track.Name = "Pic_track";
-            this.Pic_track.Size = new System.Drawing.Size(320, 261);
+            this.Pic_track.Size = new System.Drawing.Size(512, 512);
             this.Pic_track.TabIndex = 6;
             this.Pic_track.TabStop = false;
             // 
             // Cbo_selectID
             // 
             this.Cbo_selectID.FormattingEnabled = true;
-            this.Cbo_selectID.Location = new System.Drawing.Point(771, 48);
+            this.Cbo_selectID.Location = new System.Drawing.Point(772, 69);
             this.Cbo_selectID.Name = "Cbo_selectID";
             this.Cbo_selectID.Size = new System.Drawing.Size(121, 23);
             this.Cbo_selectID.TabIndex = 10;
             this.Cbo_selectID.SelectedIndexChanged += new System.EventHandler(this.Cbo_selectID_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(541, 37);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(97, 15);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "請選擇日期：";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(769, 38);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(82, 15);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "請選擇ID：";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 562);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.Cbo_selectID);
             this.Controls.Add(this.Pic_track);
             this.Controls.Add(this.Btn_cancel);
@@ -134,6 +157,8 @@
         private System.Windows.Forms.Button Btn_cancel;
         private System.Windows.Forms.PictureBox Pic_track;
         private System.Windows.Forms.ComboBox Cbo_selectID;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 

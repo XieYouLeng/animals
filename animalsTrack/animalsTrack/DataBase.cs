@@ -41,16 +41,6 @@ namespace animalsTrack
             return result;
         }
 
-        //public void GetSelectID()
-        //{
-            
-        //    using ( MySqlConnection conn = new MySqlConnection(db_connect))
-        //    {
-        //        conn.Open();
-        //        string sql_command = "SELECT * FROM `coordinates` WHERE `DateTime` between @dateTime and @date"
-        //    }
-        //}
-
         public void getAllData()
         {
             using (MySqlConnection conn = new MySqlConnection(db_connect))
