@@ -32,13 +32,23 @@ namespace animalsTrack
 
                 //第二種
                 //SELECT * FROM `coordinates` WHERE `DateTime` BETWEEN "2020-07-29(帶你的參數)" AND "2020-07-29 23:59:59(帶你改過後的參數!!)"
-                string sql_command = "select * from `coordinates` where `Datetime` between @datetime and @datetime_end;";
+                string sql_command = "select * from `coordinates` where `DateTime` between @datetime and @datetime_end;";
                 result = conn.Query<Data.coordinates>(sql_command, new { datetime = time, datetime_end = dataTime }).ToList();
 
                 conn.Close();
             }
 
             return result;
+        }
+
+        public void GetSelectId()
+        {
+            using (MySqlConnection conn = new MySqlConnection(db_connect))
+            {
+                conn.Open();
+                string sql_command = "SELECT * FROM `coordinates` WHERE `DateTime` BETWEEN @datetime and @datetime_end;";
+                conn.Close();
+            }
         }
 
         public void getAllData()

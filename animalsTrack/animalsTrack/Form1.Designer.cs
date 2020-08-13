@@ -86,14 +86,13 @@
             this.Btn_cancel.TabIndex = 5;
             this.Btn_cancel.Text = "cancel";
             this.Btn_cancel.UseVisualStyleBackColor = true;
-            this.Btn_cancel.Click += new System.EventHandler(this.Btn_cancel_Click);
             // 
             // Pic_track
             // 
             this.Pic_track.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Pic_track.Location = new System.Drawing.Point(12, 26);
             this.Pic_track.Name = "Pic_track";
-            this.Pic_track.Size = new System.Drawing.Size(512, 512);
+            this.Pic_track.Size = new System.Drawing.Size(510, 510);
             this.Pic_track.TabIndex = 6;
             this.Pic_track.TabStop = false;
             // 
@@ -155,10 +154,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button Btn_cancel;
-        private System.Windows.Forms.PictureBox Pic_track;
         private System.Windows.Forms.ComboBox Cbo_selectID;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        public System.Windows.Forms.PictureBox Pic_track;
     }
 }
 

@@ -10,20 +10,60 @@ namespace animalsTrack
 {
     class WebFunction
     {
-        //篩選完日期的資料放來這篩選ID
-        public void SelectId(List<Form1> forms)
+        private int[] id;
+        private double[] x;
+        private double[] y;
+        private float x_axis1;
+        private float y_axis1;
+        private float x_axis2;
+        private float y_axis2;
+
+        public void DrawLine(List<Data.coordinates> data, int userSelectID, float wid, float hei, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p)
         {
+            id = new int[data.Count];
+            x = new double[data.Count];
+            y = new double[data.Count];
+            int count = 0;
+            //取出ID相符的X軸、Y軸座標
+            for (int i = 0; i < data.Count; i++)
+            {
+                id[i] = data[i].ID;
+                
+                if (userSelectID == id[i])
+                {
+                    x[count] = data[i].X_axis;
+                    y[count] = data[i].Y_axis;
+                    count++;
+                }
+            }
 
-        }
+            Pen pen = new Pen(Color.Black, 3);
+            b = new SolidBrush(pen.Color);
 
-        public void DrawLinePoint(PaintEventArgs e)
-        {
-            Pen blackPen = new Pen(Color.Black, 3);
+            //清除PictureBox資料
+            if (p.Image != null)
+                p.Image = null;
+            if (bmp != null)
+                bmp.Dispose();
 
-            PointF point1 = new PointF(100.0F, 100.0F);
-            PointF point2 = new PointF(500.0F, 100.0F);
+            bmp = new Bitmap((int)p.Width, (int)p.Width);
 
-            e.Graphics.DrawLine(blackPen, point1, point2);
+            g = Graphics.FromImage(bmp);
+
+            g.Clear(Color.White);
+
+            for (int j = 0; j < count-1; j++)
+            {
+                x_axis1 = (float)x[j];
+                y_axis1 = (float)y[j];
+                x_axis2 = (float)x[j + 1];
+                y_axis2 = (float)y[j + 1];
+                
+                g.DrawLine(pen, x_axis1, y_axis1, x_axis2, y_axis2);
+            }
+            g.Dispose();
+            p.Image = bmp;
+
         }
     }
 }

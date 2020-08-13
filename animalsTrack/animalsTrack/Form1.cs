@@ -18,6 +18,11 @@ namespace animalsTrack
         WebFunction webFunction = new WebFunction();
         private int[] id;
         private List<Data.coordinates> result = new List<Data.coordinates>();
+        private float wid, hei;
+        Bitmap bmp;
+        Graphics g;
+        SolidBrush brush;
+        Pen pen;
 
         public Form1()
         {
@@ -27,6 +32,8 @@ namespace animalsTrack
             String dateTime = Dtp_dateTime.Value.ToString("yyyy-MM-dd");
             label1.Text = dateTime;
             List<Data.coordinates> result = dataBase.GetSelectData(dateTime);
+
+            Console.WriteLine(Pic_track.Width + ", " + Pic_track.Height);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -60,31 +67,19 @@ namespace animalsTrack
         //選擇ID抓出相符的資料
         private void Cbo_selectID_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string id = this.Cbo_selectID.Text;
+            string userSelectID = this.Cbo_selectID.Text;
             int ID = 0;
-            int.TryParse(id, out ID);
-            for (int i = 0; i < result.Count; i++)
-            {
-                if (result[i].ID == ID)
-                {
-                    
-                }else
-                {
+            int.TryParse(userSelectID, out ID);
 
-                }
-            }
+            wid = Pic_track.Width;
+            hei = Pic_track.Height;
+
+            webFunction.DrawLine(result, ID, wid, hei, g, bmp, brush, Pic_track);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            List<Data.coordinates> result = new List<Data.coordinates>();
             
-            //result.Add(new Data.coordinates() { ID = @ID });
-        }
-
-        private void Btn_cancel_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
