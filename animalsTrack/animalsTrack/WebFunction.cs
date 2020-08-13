@@ -37,7 +37,7 @@ namespace animalsTrack
                 }
             }
 
-            Pen pen = new Pen(Color.Black, 3);
+            Pen pen = new Pen(Color.Black, 1);
             b = new SolidBrush(pen.Color);
 
             //清除PictureBox資料
@@ -59,7 +59,7 @@ namespace animalsTrack
                 x_axis2 = (float)x[j + 1];
                 y_axis2 = (float)y[j + 1];
                 
-                g.DrawLine(pen, x_axis1, y_axis1, x_axis2, y_axis2);
+                g.DrawLine(pen, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
             }
             g.Dispose();
             p.Image = bmp;

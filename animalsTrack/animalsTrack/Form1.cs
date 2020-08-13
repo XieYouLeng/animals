@@ -75,6 +75,8 @@ namespace animalsTrack
             hei = Pic_track.Height;
 
             webFunction.DrawLine(result, ID, wid, hei, g, bmp, brush, Pic_track);
+
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
