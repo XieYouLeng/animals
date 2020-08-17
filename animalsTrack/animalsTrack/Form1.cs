@@ -22,7 +22,6 @@ namespace animalsTrack
         Bitmap bmp;
         Graphics g;
         SolidBrush brush;
-        Pen pen;
 
         public Form1()
         {
@@ -30,22 +29,15 @@ namespace animalsTrack
 
             //處理DateTimePicker會有預設值的問題
             String dateTime = Dtp_dateTime.Value.ToString("yyyy-MM-dd");
-            label1.Text = dateTime;
-            List<Data.coordinates> result = dataBase.GetSelectData(dateTime);
+            result = dataBase.GetSelectData(dateTime);
 
             Console.WriteLine(Pic_track.Width + ", " + Pic_track.Height);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            dataBase.selectData();
         }
 
         //選擇日期抓出資料庫的東西
         private void Dtp_dateTime_ValueChanged(object sender, EventArgs e)
         { 
             String dateTime = Dtp_dateTime.Value.ToString("yyyy-MM-dd");
-            label1.Text = dateTime;
             result = dataBase.GetSelectData(dateTime);
             //Cbo_selectID.Items.Add(id); //新增選項
             id = new int[result.Count];
