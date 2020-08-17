@@ -13,6 +13,7 @@ namespace animalsTrack
         private int[] id;
         private double[] x;
         private double[] y;
+        private int[] z;
         private float x_axis1;
         private float y_axis1;
         private float x_axis2;
@@ -63,7 +64,24 @@ namespace animalsTrack
             }
             g.Dispose();
             p.Image = bmp;
+        }
 
+        //計算垂直活動次數
+        public string VerticalActivity(List<Data.coordinates> data)
+        {
+            z = new int[data.Count];
+            int count = 0;
+
+            for (int i = 0; i < data.Count; i++)
+            {
+                z[i] = data[i].Z_axis;
+
+                if (z[i] == 1)
+                {
+                    count++;
+                }
+            }
+            return count.ToString();
         }
     }
 }

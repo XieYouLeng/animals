@@ -68,7 +68,7 @@ namespace animalsTrack
 
             webFunction.DrawLine(result, ID, wid, hei, g, bmp, brush, Pic_track);
 
-
+            Lbl_verticalActivity.Text = webFunction.VerticalActivity(result) + "次";
         }
 
         private void Form1_Load(object sender, EventArgs e)
