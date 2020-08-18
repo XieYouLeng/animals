@@ -66,7 +66,8 @@ namespace animalsTrack
             wid = Pic_track.Width;
             hei = Pic_track.Height;
 
-            Lbl_verticalActivity.Text = webFunction.DrawLine(result, ID, wid, hei, g, bmp, brush, Pic_track) + "次";
+            webFunction.DrawLine(result, ID, wid, hei, g, bmp, brush, Pic_track);
+            Lbl_verticalActivity.Text = webFunction.CountZAxis(result, ID) + "次";
         }
 
         private void Form1_Load(object sender, EventArgs e)

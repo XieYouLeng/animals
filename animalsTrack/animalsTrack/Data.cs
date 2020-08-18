@@ -17,5 +17,12 @@ namespace animalsTrack
             public double Y_axis { get; set; }
             public int Z_axis { get; set; }
         }
+
+        public class AsixInfo
+        {
+            public double[] x_axis { get; set; }
+            public double[] y_axis { get; set; }
+            public int[] z_axis { get; set; }
+        }
     }
 }
