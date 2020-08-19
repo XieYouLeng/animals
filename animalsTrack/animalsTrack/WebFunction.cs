@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media.Media3D;
 
 namespace animalsTrack
 {
@@ -15,6 +17,7 @@ namespace animalsTrack
         private double[] x;
         private double[] y;
         private int[] z;
+        private double[] vec;
         private int count;
         private float x_axis1;
         private float y_axis1;
@@ -47,7 +50,7 @@ namespace animalsTrack
             {
                 x_axis = x,
                 y_axis = y,
-                z_axis = z
+                z_axis = z,
             };
             return new Tuple<Data.AsixInfo>(asixInfo);
         }
@@ -88,7 +91,7 @@ namespace animalsTrack
         }
 
         //畫圖
-        public void DrawLine(List<Data.coordinates> data, int userSelectID, float wid, float hei, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p)
+        public void DrawLine(List<Data.coordinates> data, int userSelectID, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p)
         {
             SelectXAxis(data, userSelectID);
             SelectYAxis(data, userSelectID);
@@ -123,6 +126,94 @@ namespace animalsTrack
             }
             g.Dispose();
             p.Image = bmp;
+        }
+
+        ////計算向量
+        //public int XYVector(List<Data.coordinates> data, int userSelectID)
+        //{
+        //    double[] vec = new double[count];
+        //    int clockwise = 0;
+        //    int counterclockwise = 0;
+        //    SelectXAxis(data, userSelectID);
+        //    SelectYAxis(data, userSelectID);
+
+
+        //    for (int i = 0; i < count; i++)
+        //    {
+        //        var X1 = x[i + 1] - x[i];
+        //        var X2 = x[i + 2] - x[i];
+        //        var Y1 = y[i + 1] - y[i];
+        //        var Y2 = y[i + 2] - y[i];
+        //        vec[i] = X1 * Y2 - Y1 * X2;
+
+        //        if (vec[i] > 0)
+        //        {
+        //            counterclockwise++;
+        //        }else if (vec[i] < 0)
+        //        {
+        //            clockwise++;
+        //        }else
+        //        {
+
+        //        }
+
+        //    }
+        //    return counterclockwise, clockwise;
+        //}
+
+        //計算向量
+        public Tuple<Data.VecInfo> XYVector(List<Data.coordinates> data, int userSelectID)
+        {
+            double[] vec = new double[count];
+            int clockwise = 0;
+            int counterclockwise = 0;
+            SelectXAxis(data, userSelectID);
+            SelectYAxis(data, userSelectID);
+
+            for (int i = 0; i < count; i++)
+            {
+                var X1 = x[i + 1] - x[i];
+                var X2 = x[i + 2] - x[i];
+                var Y1 = y[i + 1] - y[i];
+                var Y2 = y[i + 2] - y[i];
+                vec[i] = X1 * Y2 - Y1 * X2;
+
+                if (vec[i] > 0)
+                {
+                    counterclockwise++;
+                }
+                else if (vec[i] < 0)
+                {
+                    clockwise++;
+                }
+                else
+                {
+
+                }
+            }
+
+            Data.VecInfo vecInfo = new Data.VecInfo
+            {
+                clockwise = clockwise,
+                counterclockwise = counterclockwise,
+            };
+            return new Tuple<Data.VecInfo>(vecInfo);
+        }
+
+        public string Clockwise(List<Data.coordinates> data, int userSelectID)
+        {
+            var vect = XYVector(data, userSelectID);
+            var clockwise = vect.Item1.clockwise;
+
+            return clockwise.ToString();
+        }
+
+        public string Counterclockwise(List<Data.coordinates> data, int userSelectID)
+        {
+            var vect = XYVector(data, userSelectID);
+            var counterclockwise = vect.Item1.counterclockwise;
+
+            return counterclockwise.ToString();
         }
     }
 }

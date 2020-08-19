@@ -18,7 +18,6 @@ namespace animalsTrack
         WebFunction webFunction = new WebFunction();
         private int[] id;
         private List<Data.coordinates> result = new List<Data.coordinates>();
-        private float wid, hei;
         Bitmap bmp;
         Graphics g;
         SolidBrush brush;
@@ -45,17 +44,13 @@ namespace animalsTrack
             {
                 id[i] = result[i].ID;
                 //防止重複ID
-                if (Cbo_selectID.Items.Contains(id[i]) == true)
+                if (Cbo_selectID.Items.Contains(id[i]) != true)
                 {
-
-                }
-                else
-                {
-                    Cbo_selectID.Items.Add(id[i]); //傳入ComboBox
+                    Cbo_selectID.Items.Add(id[i]);
                 }
             }
         }
-
+ 
         //選擇ID抓出相符的資料
         private void Cbo_selectID_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -63,11 +58,10 @@ namespace animalsTrack
             int ID = 0;
             int.TryParse(userSelectID, out ID);
 
-            wid = Pic_track.Width;
-            hei = Pic_track.Height;
-
-            webFunction.DrawLine(result, ID, wid, hei, g, bmp, brush, Pic_track);
+            webFunction.DrawLine(result, ID, g, bmp, brush, Pic_track);
             Lbl_verticalActivity.Text = webFunction.CountZAxis(result, ID) + "次";
+            Lbl_clockwise.Text = webFunction.Clockwise(result, ID) + "次";
+            Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID) + "次";
         }
 
         private void Form1_Load(object sender, EventArgs e)

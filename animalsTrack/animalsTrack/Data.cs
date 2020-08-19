@@ -24,5 +24,11 @@ namespace animalsTrack
             public double[] y_axis { get; set; }
             public int[] z_axis { get; set; }
         }
+
+        public class VecInfo
+        {
+            public int clockwise { get; set; }
+            public int counterclockwise { get; set; }
+        }
     }
 }
