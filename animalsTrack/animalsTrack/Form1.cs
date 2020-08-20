@@ -17,7 +17,7 @@ namespace animalsTrack
         DataBase dataBase = new DataBase();
         WebFunction webFunction = new WebFunction();
         private int[] id;
-        private List<Data.coordinates> result = new List<Data.coordinates>();
+        private List<Data.Coordinates> result = new List<Data.Coordinates>();
         Bitmap bmp;
         Graphics g;
         SolidBrush brush;

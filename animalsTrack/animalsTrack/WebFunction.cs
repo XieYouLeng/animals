@@ -24,7 +24,7 @@ namespace animalsTrack
         private float x_axis2;
         private float y_axis2;
 
-        public Tuple<Data.AsixInfo> GetAxis(List<Data.coordinates> data, int userSelectID)
+        public Tuple<Data.AsixInfo> GetAxis(List<Data.Coordinates> data, int userSelectID)
         {
             id = new int[data.Count];
             x = new double[data.Count];
@@ -56,7 +56,7 @@ namespace animalsTrack
         }
 
         //篩選後的X軸
-        public double[] SelectXAxis(List<Data.coordinates> data, int userSelectID)
+        public double[] SelectXAxis(List<Data.Coordinates> data, int userSelectID)
         {
             var axis = GetAxis(data, userSelectID);
             var x = axis.Item1.x_axis;
@@ -65,7 +65,7 @@ namespace animalsTrack
         }
 
         //篩選後的Y軸
-        public double[] SelectYAxis(List<Data.coordinates> data, int userSelectID)
+        public double[] SelectYAxis(List<Data.Coordinates> data, int userSelectID)
         {
             var axis = GetAxis(data, userSelectID);
             var y = axis.Item1.y_axis;
@@ -74,7 +74,7 @@ namespace animalsTrack
         }
 
         //計算垂直活動
-        public string CountZAxis(List<Data.coordinates> data, int userSelectID)
+        public string CountZAxis(List<Data.Coordinates> data, int userSelectID)
         {
             var axis = GetAxis(data, userSelectID);
             var z = axis.Item1.z_axis;
@@ -91,7 +91,7 @@ namespace animalsTrack
         }
 
         //畫圖
-        public void DrawLine(List<Data.coordinates> data, int userSelectID, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p)
+        public void DrawLine(List<Data.Coordinates> data, int userSelectID, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p)
         {
             SelectXAxis(data, userSelectID);
             SelectYAxis(data, userSelectID);
@@ -162,7 +162,7 @@ namespace animalsTrack
         //}
 
         //計算向量
-        public Tuple<Data.VecInfo> XYVector(List<Data.coordinates> data, int userSelectID)
+        public Tuple<Data.VecInfo> XYVector(List<Data.Coordinates> data, int userSelectID)
         {
             double[] vec = new double[count];
             int clockwise = 0;
@@ -200,7 +200,7 @@ namespace animalsTrack
             return new Tuple<Data.VecInfo>(vecInfo);
         }
 
-        public string Clockwise(List<Data.coordinates> data, int userSelectID)
+        public string Clockwise(List<Data.Coordinates> data, int userSelectID)
         {
             var vect = XYVector(data, userSelectID);
             var clockwise = vect.Item1.clockwise;
@@ -208,7 +208,7 @@ namespace animalsTrack
             return clockwise.ToString();
         }
 
-        public string Counterclockwise(List<Data.coordinates> data, int userSelectID)
+        public string Counterclockwise(List<Data.Coordinates> data, int userSelectID)
         {
             var vect = XYVector(data, userSelectID);
             var counterclockwise = vect.Item1.counterclockwise;

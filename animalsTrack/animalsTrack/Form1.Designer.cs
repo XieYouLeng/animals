@@ -40,6 +40,7 @@
             this.Lbl_verticalActivity = new System.Windows.Forms.Label();
             this.Lbl_clockwise = new System.Windows.Forms.Label();
             this.Lbl_counterclockwise = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_track)).BeginInit();
             this.SuspendLayout();
             // 
@@ -167,11 +168,22 @@
             this.Lbl_counterclockwise.TabIndex = 18;
             this.Lbl_counterclockwise.Text = "...";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(825, 514);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(120, 16);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "藍色為起點位子";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 552);
+            this.ClientSize = new System.Drawing.Size(984, 551);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.Lbl_counterclockwise);
             this.Controls.Add(this.Lbl_clockwise);
             this.Controls.Add(this.Lbl_verticalActivity);
@@ -206,6 +218,7 @@
         private System.Windows.Forms.Label Lbl_verticalActivity;
         private System.Windows.Forms.Label Lbl_clockwise;
         private System.Windows.Forms.Label Lbl_counterclockwise;
+        private System.Windows.Forms.Label label1;
     }
 }
 

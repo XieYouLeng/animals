@@ -9,7 +9,7 @@ namespace animalsTrack
     class Data
     {
         //從資料庫拉資料的格式
-        public class coordinates
+        public class Coordinates
         {
             public string DateTime { get; set; }
             public int ID { get; set; }

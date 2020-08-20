@@ -16,11 +16,11 @@ namespace animalsTrack
         String db_connect { get { return "server=140.130.35.236;uid=usblab;pwd=usblab603;database=animals_tracks;"; } } //server、帳號、密碼、資料庫
         String dataTime;
         //選擇的日期與資料庫的做比較
-        public List<Data.coordinates> GetSelectData(String time)
+        public List<Data.Coordinates> GetSelectData(String time)
         {
             //string test = "%" + time + "%";
             dataTime = time + " 23:59:59";
-            List<Data.coordinates> result = null;
+            List<Data.Coordinates> result = null;
             using ( MySqlConnection conn = new MySqlConnection(db_connect))
             {
                 conn.Open();
@@ -33,7 +33,7 @@ namespace animalsTrack
                 //第二種
                 //SELECT * FROM `coordinates` WHERE `DateTime` BETWEEN "2020-07-29(帶你的參數)" AND "2020-07-29 23:59:59(帶你改過後的參數!!)"
                 string sql_command = "select * from `coordinates` where `DateTime` between @datetime and @datetime_end;";
-                result = conn.Query<Data.coordinates>(sql_command, new { datetime = time, datetime_end = dataTime }).ToList();
+                result = conn.Query<Data.Coordinates>(sql_command, new { datetime = time, datetime_end = dataTime }).ToList();
 
                 conn.Close();
             }
