@@ -7,7 +7,6 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media.Media3D;
 
 namespace animalsTrack
 {
@@ -17,7 +16,6 @@ namespace animalsTrack
         private double[] x;
         private double[] y;
         private int[] z;
-        private double[] vec;
         private int count;
         private float x_axis1;
         private float y_axis1;
@@ -96,9 +94,8 @@ namespace animalsTrack
             SelectXAxis(data, userSelectID);
             SelectYAxis(data, userSelectID);
 
-
             Pen pen_b = new Pen(Color.Black, 1);
-            Pen pen_r = new Pen(Color.Blue, 1);
+            Pen pen_r = new Pen(Color.Red, 1);
             b = new SolidBrush(pen_b.Color);
 
             //清除PictureBox資料
@@ -127,39 +124,6 @@ namespace animalsTrack
             g.Dispose();
             p.Image = bmp;
         }
-
-        ////計算向量
-        //public int XYVector(List<Data.coordinates> data, int userSelectID)
-        //{
-        //    double[] vec = new double[count];
-        //    int clockwise = 0;
-        //    int counterclockwise = 0;
-        //    SelectXAxis(data, userSelectID);
-        //    SelectYAxis(data, userSelectID);
-
-
-        //    for (int i = 0; i < count; i++)
-        //    {
-        //        var X1 = x[i + 1] - x[i];
-        //        var X2 = x[i + 2] - x[i];
-        //        var Y1 = y[i + 1] - y[i];
-        //        var Y2 = y[i + 2] - y[i];
-        //        vec[i] = X1 * Y2 - Y1 * X2;
-
-        //        if (vec[i] > 0)
-        //        {
-        //            counterclockwise++;
-        //        }else if (vec[i] < 0)
-        //        {
-        //            clockwise++;
-        //        }else
-        //        {
-
-        //        }
-
-        //    }
-        //    return counterclockwise, clockwise;
-        //}
 
         //計算向量
         public Tuple<Data.VecInfo> XYVector(List<Data.Coordinates> data, int userSelectID)
@@ -200,6 +164,7 @@ namespace animalsTrack
             return new Tuple<Data.VecInfo>(vecInfo);
         }
 
+        //傳順時針
         public string Clockwise(List<Data.Coordinates> data, int userSelectID)
         {
             var vect = XYVector(data, userSelectID);
@@ -208,12 +173,24 @@ namespace animalsTrack
             return clockwise.ToString();
         }
 
+        //傳逆時針
         public string Counterclockwise(List<Data.Coordinates> data, int userSelectID)
         {
             var vect = XYVector(data, userSelectID);
             var counterclockwise = vect.Item1.counterclockwise;
 
             return counterclockwise.ToString();
+        }
+
+        //傳目前總共幾筆資料
+        public string Str_DataBaseNumber()
+        {
+            return count.ToString();
+        }
+
+        public int Int_DataBaseNumber()
+        {
+            return count;
         }
     }
 }

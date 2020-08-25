@@ -30,5 +30,12 @@ namespace animalsTrack
             public int clockwise { get; set; }
             public int counterclockwise { get; set; }
         }
+
+        //滑鼠指向點出現的X、Y軸
+        public class Item
+        {
+            public double X { get; set; }
+            public double Y { get; set; }
+        }
     }
 }

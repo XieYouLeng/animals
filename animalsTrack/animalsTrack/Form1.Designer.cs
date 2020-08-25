@@ -32,8 +32,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.Pic_track = new System.Windows.Forms.PictureBox();
             this.Cbo_selectID = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.Lbl_selectDate = new System.Windows.Forms.Label();
+            this.Lbl_selectID = new System.Windows.Forms.Label();
             this.Lbl_vertAct = new System.Windows.Forms.Label();
             this.Lbl_clockwiseTimes = new System.Windows.Forms.Label();
             this.Lbl_counterclockwiseTimes = new System.Windows.Forms.Label();
@@ -41,6 +41,13 @@
             this.Lbl_clockwise = new System.Windows.Forms.Label();
             this.Lbl_counterclockwise = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.Tb_selectNumber = new System.Windows.Forms.TextBox();
+            this.Lbl_selectNumber = new System.Windows.Forms.Label();
+            this.Lbl_showNumber = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.Lbl_ = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Lbl_startNumber = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_track)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,40 +86,40 @@
             // 
             this.Cbo_selectID.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.Cbo_selectID.FormattingEnabled = true;
-            this.Cbo_selectID.Location = new System.Drawing.Point(738, 54);
+            this.Cbo_selectID.Location = new System.Drawing.Point(741, 54);
             this.Cbo_selectID.Margin = new System.Windows.Forms.Padding(2);
             this.Cbo_selectID.Name = "Cbo_selectID";
             this.Cbo_selectID.Size = new System.Drawing.Size(92, 24);
             this.Cbo_selectID.TabIndex = 10;
             this.Cbo_selectID.SelectedIndexChanged += new System.EventHandler(this.Cbo_selectID_SelectedIndexChanged);
             // 
-            // label3
+            // Lbl_selectDate
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(564, 20);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(104, 16);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "請選擇日期：";
+            this.Lbl_selectDate.AutoSize = true;
+            this.Lbl_selectDate.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Lbl_selectDate.Location = new System.Drawing.Point(564, 20);
+            this.Lbl_selectDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Lbl_selectDate.Name = "Lbl_selectDate";
+            this.Lbl_selectDate.Size = new System.Drawing.Size(104, 16);
+            this.Lbl_selectDate.TabIndex = 11;
+            this.Lbl_selectDate.Text = "請選擇日期：";
             // 
-            // label4
+            // Lbl_selectID
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label4.Location = new System.Drawing.Point(735, 20);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(88, 16);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "請選擇ID：";
+            this.Lbl_selectID.AutoSize = true;
+            this.Lbl_selectID.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Lbl_selectID.Location = new System.Drawing.Point(738, 20);
+            this.Lbl_selectID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Lbl_selectID.Name = "Lbl_selectID";
+            this.Lbl_selectID.Size = new System.Drawing.Size(88, 16);
+            this.Lbl_selectID.TabIndex = 12;
+            this.Lbl_selectID.Text = "請選擇ID：";
             // 
             // Lbl_vertAct
             // 
             this.Lbl_vertAct.AutoSize = true;
             this.Lbl_vertAct.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Lbl_vertAct.Location = new System.Drawing.Point(564, 141);
+            this.Lbl_vertAct.Location = new System.Drawing.Point(564, 285);
             this.Lbl_vertAct.Name = "Lbl_vertAct";
             this.Lbl_vertAct.Size = new System.Drawing.Size(120, 16);
             this.Lbl_vertAct.TabIndex = 13;
@@ -122,7 +129,7 @@
             // 
             this.Lbl_clockwiseTimes.AutoSize = true;
             this.Lbl_clockwiseTimes.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Lbl_clockwiseTimes.Location = new System.Drawing.Point(564, 220);
+            this.Lbl_clockwiseTimes.Location = new System.Drawing.Point(564, 358);
             this.Lbl_clockwiseTimes.Name = "Lbl_clockwiseTimes";
             this.Lbl_clockwiseTimes.Size = new System.Drawing.Size(104, 16);
             this.Lbl_clockwiseTimes.TabIndex = 14;
@@ -132,7 +139,7 @@
             // 
             this.Lbl_counterclockwiseTimes.AutoSize = true;
             this.Lbl_counterclockwiseTimes.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Lbl_counterclockwiseTimes.Location = new System.Drawing.Point(564, 299);
+            this.Lbl_counterclockwiseTimes.Location = new System.Drawing.Point(564, 431);
             this.Lbl_counterclockwiseTimes.Name = "Lbl_counterclockwiseTimes";
             this.Lbl_counterclockwiseTimes.Size = new System.Drawing.Size(104, 16);
             this.Lbl_counterclockwiseTimes.TabIndex = 15;
@@ -142,7 +149,7 @@
             // 
             this.Lbl_verticalActivity.AutoSize = true;
             this.Lbl_verticalActivity.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Lbl_verticalActivity.Location = new System.Drawing.Point(677, 141);
+            this.Lbl_verticalActivity.Location = new System.Drawing.Point(675, 285);
             this.Lbl_verticalActivity.Name = "Lbl_verticalActivity";
             this.Lbl_verticalActivity.Size = new System.Drawing.Size(32, 16);
             this.Lbl_verticalActivity.TabIndex = 16;
@@ -152,7 +159,7 @@
             // 
             this.Lbl_clockwise.AutoSize = true;
             this.Lbl_clockwise.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Lbl_clockwise.Location = new System.Drawing.Point(661, 220);
+            this.Lbl_clockwise.Location = new System.Drawing.Point(663, 358);
             this.Lbl_clockwise.Name = "Lbl_clockwise";
             this.Lbl_clockwise.Size = new System.Drawing.Size(32, 16);
             this.Lbl_clockwise.TabIndex = 17;
@@ -162,7 +169,7 @@
             // 
             this.Lbl_counterclockwise.AutoSize = true;
             this.Lbl_counterclockwise.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Lbl_counterclockwise.Location = new System.Drawing.Point(661, 299);
+            this.Lbl_counterclockwise.Location = new System.Drawing.Point(663, 431);
             this.Lbl_counterclockwise.Name = "Lbl_counterclockwise";
             this.Lbl_counterclockwise.Size = new System.Drawing.Size(32, 16);
             this.Lbl_counterclockwise.TabIndex = 18;
@@ -172,17 +179,92 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(825, 514);
+            this.label1.Location = new System.Drawing.Point(934, 514);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(120, 16);
             this.label1.TabIndex = 19;
-            this.label1.Text = "藍色為起點位子";
+            this.label1.Text = "紅色為起點位子";
+            // 
+            // Tb_selectNumber
+            // 
+            this.Tb_selectNumber.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Tb_selectNumber.Location = new System.Drawing.Point(856, 54);
+            this.Tb_selectNumber.Name = "Tb_selectNumber";
+            this.Tb_selectNumber.Size = new System.Drawing.Size(100, 27);
+            this.Tb_selectNumber.TabIndex = 20;
+            this.Tb_selectNumber.TextChanged += new System.EventHandler(this.Tb_selectNumber_TextChanged);
+            // 
+            // Lbl_selectNumber
+            // 
+            this.Lbl_selectNumber.AutoSize = true;
+            this.Lbl_selectNumber.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Lbl_selectNumber.Location = new System.Drawing.Point(853, 20);
+            this.Lbl_selectNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Lbl_selectNumber.Name = "Lbl_selectNumber";
+            this.Lbl_selectNumber.Size = new System.Drawing.Size(136, 16);
+            this.Lbl_selectNumber.TabIndex = 12;
+            this.Lbl_selectNumber.Text = "請輸入顯示筆數：";
+            // 
+            // Lbl_showNumber
+            // 
+            this.Lbl_showNumber.AutoSize = true;
+            this.Lbl_showNumber.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Lbl_showNumber.Location = new System.Drawing.Point(710, 212);
+            this.Lbl_showNumber.Name = "Lbl_showNumber";
+            this.Lbl_showNumber.Size = new System.Drawing.Size(32, 16);
+            this.Lbl_showNumber.TabIndex = 22;
+            this.Lbl_showNumber.Text = "...";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label3.Location = new System.Drawing.Point(564, 212);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(152, 16);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "目前實際顯示筆數：";
+            // 
+            // Lbl_
+            // 
+            this.Lbl_.AutoSize = true;
+            this.Lbl_.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Lbl_.Location = new System.Drawing.Point(995, 20);
+            this.Lbl_.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Lbl_.Name = "Lbl_";
+            this.Lbl_.Size = new System.Drawing.Size(168, 16);
+            this.Lbl_.TabIndex = 12;
+            this.Lbl_.Text = "請輸入從第幾筆開始：";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox1.Location = new System.Drawing.Point(998, 54);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 27);
+            this.textBox1.TabIndex = 20;
+            this.textBox1.TextChanged += new System.EventHandler(this.Tb_selectNumber_TextChanged);
+            // 
+            // Lbl_startNumber
+            // 
+            this.Lbl_startNumber.AutoSize = true;
+            this.Lbl_startNumber.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Lbl_startNumber.Location = new System.Drawing.Point(564, 139);
+            this.Lbl_startNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Lbl_startNumber.Name = "Lbl_startNumber";
+            this.Lbl_startNumber.Size = new System.Drawing.Size(32, 16);
+            this.Lbl_startNumber.TabIndex = 12;
+            this.Lbl_startNumber.Text = "...";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 551);
+            this.ClientSize = new System.Drawing.Size(1184, 551);
+            this.Controls.Add(this.Lbl_showNumber);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.Tb_selectNumber);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Lbl_counterclockwise);
             this.Controls.Add(this.Lbl_clockwise);
@@ -190,8 +272,12 @@
             this.Controls.Add(this.Lbl_counterclockwiseTimes);
             this.Controls.Add(this.Lbl_clockwiseTimes);
             this.Controls.Add(this.Lbl_vertAct);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.Lbl_);
+            this.Controls.Add(this.Lbl_startNumber);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.Lbl_selectNumber);
+            this.Controls.Add(this.Lbl_selectID);
+            this.Controls.Add(this.Lbl_selectDate);
             this.Controls.Add(this.Cbo_selectID);
             this.Controls.Add(this.Pic_track);
             this.Controls.Add(this.label2);
@@ -209,8 +295,8 @@
         private System.Windows.Forms.DateTimePicker Dtp_dateTime;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox Cbo_selectID;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label Lbl_selectDate;
+        private System.Windows.Forms.Label Lbl_selectID;
         public System.Windows.Forms.PictureBox Pic_track;
         private System.Windows.Forms.Label Lbl_vertAct;
         private System.Windows.Forms.Label Lbl_clockwiseTimes;
@@ -219,6 +305,13 @@
         private System.Windows.Forms.Label Lbl_clockwise;
         private System.Windows.Forms.Label Lbl_counterclockwise;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox Tb_selectNumber;
+        private System.Windows.Forms.Label Lbl_selectNumber;
+        private System.Windows.Forms.Label Lbl_showNumber;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label Lbl_;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label Lbl_startNumber;
     }
 }
 
