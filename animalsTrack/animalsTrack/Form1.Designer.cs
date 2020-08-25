@@ -44,10 +44,10 @@
             this.Tb_selectNumber = new System.Windows.Forms.TextBox();
             this.Lbl_selectNumber = new System.Windows.Forms.Label();
             this.Lbl_showNumber = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.Lbl_ = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Lbl_nowShowNumber = new System.Windows.Forms.Label();
             this.Lbl_startNumber = new System.Windows.Forms.Label();
+            this.Tb_startNumber = new System.Windows.Forms.TextBox();
+            this.Lbl_showStartNumber = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_track)).BeginInit();
             this.SuspendLayout();
             // 
@@ -215,47 +215,47 @@
             this.Lbl_showNumber.TabIndex = 22;
             this.Lbl_showNumber.Text = "...";
             // 
-            // label3
+            // Lbl_nowShowNumber
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(564, 212);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(152, 16);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "目前實際顯示筆數：";
-            // 
-            // Lbl_
-            // 
-            this.Lbl_.AutoSize = true;
-            this.Lbl_.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Lbl_.Location = new System.Drawing.Point(995, 20);
-            this.Lbl_.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.Lbl_.Name = "Lbl_";
-            this.Lbl_.Size = new System.Drawing.Size(168, 16);
-            this.Lbl_.TabIndex = 12;
-            this.Lbl_.Text = "請輸入從第幾筆開始：";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox1.Location = new System.Drawing.Point(998, 54);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 27);
-            this.textBox1.TabIndex = 20;
-            this.textBox1.TextChanged += new System.EventHandler(this.Tb_selectNumber_TextChanged);
+            this.Lbl_nowShowNumber.AutoSize = true;
+            this.Lbl_nowShowNumber.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Lbl_nowShowNumber.Location = new System.Drawing.Point(564, 212);
+            this.Lbl_nowShowNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Lbl_nowShowNumber.Name = "Lbl_nowShowNumber";
+            this.Lbl_nowShowNumber.Size = new System.Drawing.Size(152, 16);
+            this.Lbl_nowShowNumber.TabIndex = 12;
+            this.Lbl_nowShowNumber.Text = "目前實際顯示筆數：";
             // 
             // Lbl_startNumber
             // 
             this.Lbl_startNumber.AutoSize = true;
             this.Lbl_startNumber.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Lbl_startNumber.Location = new System.Drawing.Point(564, 139);
+            this.Lbl_startNumber.Location = new System.Drawing.Point(995, 20);
             this.Lbl_startNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Lbl_startNumber.Name = "Lbl_startNumber";
-            this.Lbl_startNumber.Size = new System.Drawing.Size(32, 16);
+            this.Lbl_startNumber.Size = new System.Drawing.Size(168, 16);
             this.Lbl_startNumber.TabIndex = 12;
-            this.Lbl_startNumber.Text = "...";
+            this.Lbl_startNumber.Text = "請輸入從第幾筆開始：";
+            // 
+            // Tb_startNumber
+            // 
+            this.Tb_startNumber.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Tb_startNumber.Location = new System.Drawing.Point(998, 54);
+            this.Tb_startNumber.Name = "Tb_startNumber";
+            this.Tb_startNumber.Size = new System.Drawing.Size(100, 27);
+            this.Tb_startNumber.TabIndex = 20;
+            this.Tb_startNumber.TextChanged += new System.EventHandler(this.Tb_startNumber_TextChanged);
+            // 
+            // Lbl_showStartNumber
+            // 
+            this.Lbl_showStartNumber.AutoSize = true;
+            this.Lbl_showStartNumber.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Lbl_showStartNumber.Location = new System.Drawing.Point(564, 139);
+            this.Lbl_showStartNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Lbl_showStartNumber.Name = "Lbl_showStartNumber";
+            this.Lbl_showStartNumber.Size = new System.Drawing.Size(32, 16);
+            this.Lbl_showStartNumber.TabIndex = 12;
+            this.Lbl_showStartNumber.Text = "...";
             // 
             // Form1
             // 
@@ -263,7 +263,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 551);
             this.Controls.Add(this.Lbl_showNumber);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.Tb_startNumber);
             this.Controls.Add(this.Tb_selectNumber);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Lbl_counterclockwise);
@@ -272,9 +272,9 @@
             this.Controls.Add(this.Lbl_counterclockwiseTimes);
             this.Controls.Add(this.Lbl_clockwiseTimes);
             this.Controls.Add(this.Lbl_vertAct);
-            this.Controls.Add(this.Lbl_);
             this.Controls.Add(this.Lbl_startNumber);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.Lbl_showStartNumber);
+            this.Controls.Add(this.Lbl_nowShowNumber);
             this.Controls.Add(this.Lbl_selectNumber);
             this.Controls.Add(this.Lbl_selectID);
             this.Controls.Add(this.Lbl_selectDate);
@@ -308,10 +308,10 @@
         private System.Windows.Forms.TextBox Tb_selectNumber;
         private System.Windows.Forms.Label Lbl_selectNumber;
         private System.Windows.Forms.Label Lbl_showNumber;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label Lbl_;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label Lbl_nowShowNumber;
         private System.Windows.Forms.Label Lbl_startNumber;
+        private System.Windows.Forms.TextBox Tb_startNumber;
+        private System.Windows.Forms.Label Lbl_showStartNumber;
     }
 }
 

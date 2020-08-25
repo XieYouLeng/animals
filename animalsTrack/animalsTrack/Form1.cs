@@ -19,6 +19,7 @@ namespace animalsTrack
         WebFunction webFunction = new WebFunction();
         private int[] id;
         private int no_num = 0;
+        private int ID = 0;
         private List<Data.Coordinates> result = new List<Data.Coordinates>();
         Bitmap bmp;
         Graphics g;
@@ -59,7 +60,6 @@ namespace animalsTrack
         private void Cbo_selectID_SelectedIndexChanged(object sender, EventArgs e)
         {
             string userSelectID = this.Cbo_selectID.Text;
-            int ID = 0;
             int.TryParse(userSelectID, out ID);
 
             
@@ -105,10 +105,19 @@ namespace animalsTrack
             
         }
 
-        //取出TextBox的數值
+        //取出selectNumber的數值，改變顯示數量
         private void Tb_selectNumber_TextChanged(object sender, EventArgs e)
         {
+            int num = 0;
             Lbl_showNumber.Text = "共" + Tb_selectNumber.Text + "筆";
+            int.TryParse(Tb_selectNumber.Text, out num);
+            webFunction.ChangeShowNumber(result, ID, g, bmp, brush, Pic_track, num);
+        }
+
+        //取出startNumber的數值，改變起始值
+        private void Tb_startNumber_TextChanged(object sender, EventArgs e)
+        {
+            Lbl_showStartNumber.Text = "從第" + Tb_startNumber.Text + "筆開始";
         }
     }
 }

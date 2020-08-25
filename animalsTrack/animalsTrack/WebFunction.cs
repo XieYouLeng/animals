@@ -188,9 +188,47 @@ namespace animalsTrack
             return count.ToString();
         }
 
-        public int Int_DataBaseNumber()
+        //改變顯示數量
+        public void ChangeShowNumber(List<Data.Coordinates> data, int userSelectID, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p, int num)
         {
-            return count;
+            SelectXAxis(data, userSelectID);
+            SelectYAxis(data, userSelectID);
+
+            Pen pen_b = new Pen(Color.Black, 1);
+            Pen pen_r = new Pen(Color.Red, 1);
+            b = new SolidBrush(pen_b.Color);
+
+            //清除PictureBox資料
+            if (p.Image != null)
+                p.Image = null;
+            if (bmp != null)
+                bmp.Dispose();
+
+            bmp = new Bitmap((int)p.Width, (int)p.Width);
+
+            g = Graphics.FromImage(bmp);
+
+            g.Clear(Color.White);
+
+            g.DrawLine(pen_r, 2 * (float)x[0], 2 * (float)y[0], 2 * (float)x[1], 2 * (float)y[1]);
+
+            for (int j = 1; j < num - 1; j++)
+            {
+                x_axis1 = (float)x[j];
+                y_axis1 = (float)y[j];
+                x_axis2 = (float)x[j + 1];
+                y_axis2 = (float)y[j + 1];
+
+                g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
+            }
+            g.Dispose();
+            p.Image = bmp;
+        }
+
+        //改變起始值
+        public void ChangeStartNumber()
+        {
+
         }
     }
 }
