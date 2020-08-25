@@ -44,7 +44,7 @@ namespace animalsTrack
         { 
             String dateTime = Dtp_dateTime.Value.ToString("yyyy-MM-dd");
             result = dataBase.GetSelectData(dateTime);
-            //Cbo_selectID.Items.Add(id); //新增選項
+
             id = new int[result.Count];
             for (int i = 0; i < result.Count; i++)
             {
@@ -109,17 +109,34 @@ namespace animalsTrack
         //取出selectNumber的數值，改變顯示數量
         private void Tb_selectNumber_TextChanged(object sender, EventArgs e)
         {
-            Lbl_showNumber.Text = "共" + Tb_selectNumber.Text + "筆";
             int.TryParse(Tb_selectNumber.Text, out show_num);
-            webFunction.ChangeShowNumber(result, ID, g, bmp, brush, Pic_track, show_num);
+            if (show_num != 0)
+            {
+                webFunction.ChangeShowNumber(result, ID, g, bmp, brush, Pic_track, show_num);
+                Lbl_showNumber.Text = "共" + Tb_selectNumber.Text +"筆";
+            }
+            else
+            {
+                webFunction.DrawLine(result, ID, g, bmp, brush, Pic_track);
+                Lbl_showNumber.Text = "共" + webFunction.Int_DataBaseNumber() + "筆";
+            }
+                
         }
 
         //取出startNumber的數值，改變起始值
         private void Tb_startNumber_TextChanged(object sender, EventArgs e)
         {
-            Lbl_showStartNumber.Text = "從第" + Tb_startNumber.Text + "筆開始";
             int.TryParse(Tb_startNumber.Text, out start_num);
-            webFunction.ChangeStartNumber(result, ID, g, bmp, brush, Pic_track, show_num, start_num);
+            if (start_num != 0)
+            {
+                webFunction.ChangeStartNumber(result, ID, g, bmp, brush, Pic_track, show_num, start_num);
+                Lbl_showStartNumber.Text = "從第" + Tb_startNumber.Text + "筆開始";
+            }
+            else
+            {
+                Tb_selectNumber_TextChanged(sender, e);
+                Lbl_showStartNumber.Text = "從第1筆開始";
+            }
         }
     }
 }

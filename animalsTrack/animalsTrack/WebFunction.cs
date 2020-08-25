@@ -216,26 +216,19 @@ namespace animalsTrack
 
             g.Clear(Color.White);
 
-            if (num != 0)
-            {
-                g.DrawLine(pen_r, 2 * (float)x[0], 2 * (float)y[0], 2 * (float)x[1], 2 * (float)y[1]);
+            g.DrawLine(pen_r, 2 * (float)x[0], 2 * (float)y[0], 2 * (float)x[1], 2 * (float)y[1]);
 
-                for (int j = 1; j < num - 1; j++)
-                {
-                    x_axis1 = (float)x[j];
-                    y_axis1 = (float)y[j];
-                    x_axis2 = (float)x[j + 1];
-                    y_axis2 = (float)y[j + 1];
-
-                    g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
-                }
-                g.Dispose();
-                p.Image = bmp;
-            }
-            else
+            for (int j = 1; j < num - 1; j++)
             {
-                DrawLine(data, userSelectID, g, bmp, b, p);
+                x_axis1 = (float)x[j];
+                y_axis1 = (float)y[j];
+                x_axis2 = (float)x[j + 1];
+                y_axis2 = (float)y[j + 1];
+
+                g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
             }
+            g.Dispose();
+            p.Image = bmp;
         }
 
         //改變起始值
@@ -264,7 +257,7 @@ namespace animalsTrack
             {
                 g.DrawLine(pen_r, 2 * (float)x[start_num - 1], 2 * (float)y[start_num - 1], 2 * (float)x[start_num], 2 * (float)y[start_num]);
 
-                for (int j = start_num; j < show_num - 1; j++)
+                for (int j = start_num; j < start_num + show_num - 2; j++)
                 {
                     x_axis1 = (float)x[j];
                     y_axis1 = (float)y[j];
