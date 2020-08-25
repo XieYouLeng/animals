@@ -18,8 +18,9 @@ namespace animalsTrack
         DataBase dataBase = new DataBase();
         WebFunction webFunction = new WebFunction();
         private int[] id;
-        private int no_num = 0;
         private int ID = 0;
+        private int show_num = 0;
+        private int start_num = 0;
         private List<Data.Coordinates> result = new List<Data.Coordinates>();
         Bitmap bmp;
         Graphics g;
@@ -61,7 +62,7 @@ namespace animalsTrack
         {
             string userSelectID = this.Cbo_selectID.Text;
             int.TryParse(userSelectID, out ID);
-
+            show_num = webFunction.Int_DataBaseNumber();
             
             webFunction.DrawLine(result, ID, g, bmp, brush, Pic_track);
             Lbl_showNumber.Text = "共" + webFunction.Str_DataBaseNumber() + "筆";
@@ -108,16 +109,17 @@ namespace animalsTrack
         //取出selectNumber的數值，改變顯示數量
         private void Tb_selectNumber_TextChanged(object sender, EventArgs e)
         {
-            int num = 0;
             Lbl_showNumber.Text = "共" + Tb_selectNumber.Text + "筆";
-            int.TryParse(Tb_selectNumber.Text, out num);
-            webFunction.ChangeShowNumber(result, ID, g, bmp, brush, Pic_track, num);
+            int.TryParse(Tb_selectNumber.Text, out show_num);
+            webFunction.ChangeShowNumber(result, ID, g, bmp, brush, Pic_track, show_num);
         }
 
         //取出startNumber的數值，改變起始值
         private void Tb_startNumber_TextChanged(object sender, EventArgs e)
         {
             Lbl_showStartNumber.Text = "從第" + Tb_startNumber.Text + "筆開始";
+            int.TryParse(Tb_startNumber.Text, out start_num);
+            webFunction.ChangeStartNumber(result, ID, g, bmp, brush, Pic_track, show_num, start_num);
         }
     }
 }
