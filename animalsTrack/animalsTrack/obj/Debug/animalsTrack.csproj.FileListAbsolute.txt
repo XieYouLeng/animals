@@ -264,3 +264,4 @@ C:\Users\usblab\Desktop\animals\animalsTrack\animalsTrack\obj\Debug\animalsTrack
 C:\Users\usblab\Desktop\animals\animalsTrack\animalsTrack\obj\Debug\animalsTrack.csproj.CopyComplete
 C:\Users\usblab\Desktop\animals\animalsTrack\animalsTrack\obj\Debug\animalsTrack.exe
 C:\Users\usblab\Desktop\animals\animalsTrack\animalsTrack\obj\Debug\animalsTrack.pdb
+C:\Users\usblab\Desktop\animals\animalsTrack\animalsTrack\obj\Debug\animalsTrack.Form2.resources

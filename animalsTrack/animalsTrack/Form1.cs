@@ -17,6 +17,7 @@ namespace animalsTrack
     {
         DataBase dataBase = new DataBase();
         WebFunction webFunction = new WebFunction();
+        Form2 form2 = new Form2();
         private int[] id;
         private int ID = 0;
         private int show_num = 0;
@@ -41,7 +42,7 @@ namespace animalsTrack
 
         //選擇日期抓出資料庫的東西
         private void Dtp_dateTime_ValueChanged(object sender, EventArgs e)
-        { 
+        {
             String dateTime = Dtp_dateTime.Value.ToString("yyyy-MM-dd");
             result = dataBase.GetSelectData(dateTime);
 
@@ -56,14 +57,14 @@ namespace animalsTrack
                 }
             }
         }
- 
+
         //選擇ID抓出相符的資料
         private void Cbo_selectID_SelectedIndexChanged(object sender, EventArgs e)
         {
             string userSelectID = this.Cbo_selectID.Text;
             int.TryParse(userSelectID, out ID);
             show_num = webFunction.Int_DataBaseNumber();
-            
+
             webFunction.DrawLine(result, ID, g, bmp, brush, Pic_track);
             Lbl_showNumber.Text = "共" + webFunction.Str_DataBaseNumber() + "筆";
             Lbl_verticalActivity.Text = webFunction.CountZAxis(result, ID) + "次";
@@ -103,7 +104,7 @@ namespace animalsTrack
         //}
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         //取出selectNumber的數值，改變顯示數量
@@ -113,7 +114,7 @@ namespace animalsTrack
             if (show_num != 0 && show_num <= webFunction.Int_DataBaseNumber())
             {
                 webFunction.ChangeShowNumber(result, ID, g, bmp, brush, Pic_track, show_num);
-                Lbl_showNumber.Text = "共" + Tb_selectNumber.Text +"筆";
+                Lbl_showNumber.Text = "共" + Tb_selectNumber.Text + "筆";
             }
             else if (show_num > webFunction.Int_DataBaseNumber())
             {
@@ -124,7 +125,7 @@ namespace animalsTrack
                 webFunction.DrawLine(result, ID, g, bmp, brush, Pic_track);
                 Lbl_showNumber.Text = "共" + webFunction.Int_DataBaseNumber() + "筆";
             }
-                
+
         }
 
         //取出startNumber的數值，改變起始值
@@ -140,6 +141,16 @@ namespace animalsTrack
             {
                 Tb_selectNumber_TextChanged(sender, e);
                 Lbl_showStartNumber.Text = "從第1筆開始";
+            }
+        }
+
+        //轉成PC端
+        private void Btn_changePC_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            if (form2.ShowDialog() == DialogResult.OK)
+            {
+                this.Show();
             }
         }
     }

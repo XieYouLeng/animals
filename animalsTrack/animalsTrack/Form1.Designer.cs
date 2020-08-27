@@ -48,6 +48,7 @@
             this.Lbl_startNumber = new System.Windows.Forms.Label();
             this.Tb_startNumber = new System.Windows.Forms.TextBox();
             this.Lbl_showStartNumber = new System.Windows.Forms.Label();
+            this.Btn_changePC = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_track)).BeginInit();
             this.SuspendLayout();
             // 
@@ -257,11 +258,24 @@
             this.Lbl_showStartNumber.TabIndex = 12;
             this.Lbl_showStartNumber.Text = "...";
             // 
+            // Btn_changePC
+            // 
+            this.Btn_changePC.BackColor = System.Drawing.SystemColors.Control;
+            this.Btn_changePC.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Btn_changePC.Location = new System.Drawing.Point(889, 496);
+            this.Btn_changePC.Name = "Btn_changePC";
+            this.Btn_changePC.Size = new System.Drawing.Size(128, 34);
+            this.Btn_changePC.TabIndex = 23;
+            this.Btn_changePC.Text = "切換PC端模式";
+            this.Btn_changePC.UseVisualStyleBackColor = false;
+            this.Btn_changePC.Click += new System.EventHandler(this.Btn_changePC_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 551);
+            this.Controls.Add(this.Btn_changePC);
             this.Controls.Add(this.Lbl_showNumber);
             this.Controls.Add(this.Tb_startNumber);
             this.Controls.Add(this.Tb_selectNumber);
@@ -312,6 +326,7 @@
         private System.Windows.Forms.Label Lbl_startNumber;
         private System.Windows.Forms.TextBox Tb_startNumber;
         private System.Windows.Forms.Label Lbl_showStartNumber;
+        private System.Windows.Forms.Button Btn_changePC;
     }
 }
 
