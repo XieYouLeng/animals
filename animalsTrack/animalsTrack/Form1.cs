@@ -68,8 +68,8 @@ namespace animalsTrack
             webFunction.DrawLine(result, ID, g, bmp, brush, Pic_track);
             Lbl_showNumber.Text = "共" + webFunction.Str_DataBaseNumber() + "筆";
             Lbl_verticalActivity.Text = webFunction.CountZAxis(result, ID) + "次";
-            Lbl_clockwise.Text = webFunction.Clockwise(result, ID) + "次";
-            Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID) + "次";
+            Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";
+            Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";
         }
 
         //void chart1_MouseMove(object sender, MouseEventArgs e)
@@ -115,6 +115,8 @@ namespace animalsTrack
             {
                 webFunction.ChangeShowNumber(result, ID, g, bmp, brush, Pic_track, show_num);
                 Lbl_showNumber.Text = "共" + Tb_selectNumber.Text + "筆";
+                Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";
+                Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";
             }
             else if (show_num > webFunction.Int_DataBaseNumber())
             {
@@ -124,6 +126,8 @@ namespace animalsTrack
             {
                 webFunction.DrawLine(result, ID, g, bmp, brush, Pic_track);
                 Lbl_showNumber.Text = "共" + webFunction.Int_DataBaseNumber() + "筆";
+                Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";
+                Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";
             }
 
         }
@@ -136,15 +140,19 @@ namespace animalsTrack
             {
                 webFunction.ChangeStartNumber(result, ID, g, bmp, brush, Pic_track, show_num, start_num);
                 Lbl_showStartNumber.Text = "從第" + Tb_startNumber.Text + "筆開始";
+                Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";
+                Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";
             }
             else
             {
                 Tb_selectNumber_TextChanged(sender, e);
                 Lbl_showStartNumber.Text = "從第1筆開始";
+                Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";
+                Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";
             }
         }
 
-        //轉成PC端
+        //切換PC端
         private void Btn_changePC_Click(object sender, EventArgs e)
         {
             this.Hide();

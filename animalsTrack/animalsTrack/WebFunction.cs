@@ -126,7 +126,7 @@ namespace animalsTrack
         }
 
         //計算向量
-        public Tuple<Data.VecInfo> XYVector(List<Data.Coordinates> data, int userSelectID)
+        public Tuple<Data.VecInfo> XYVector(List<Data.Coordinates> data, int userSelectID, int show_num, int start_num)
         {
             double[] vec = new double[count];
             int clockwise = 0;
@@ -134,28 +134,113 @@ namespace animalsTrack
             SelectXAxis(data, userSelectID);
             SelectYAxis(data, userSelectID);
 
-            for (int i = 0; i < count; i++)
+            if (show_num + start_num <= count)
             {
-                var X1 = x[i + 1] - x[i];
-                var X2 = x[i + 2] - x[i];
-                var Y1 = y[i + 1] - y[i];
-                var Y2 = y[i + 2] - y[i];
-                vec[i] = X1 * Y2 - Y1 * X2;
+                if (show_num != 0 && start_num != 0)
+                {
+                    for (int i = start_num - 1; i < start_num + show_num - 2; i++)
+                    {
+                        var X1 = x[i + 1] - x[i];
+                        var X2 = x[i + 2] - x[i];
+                        var Y1 = y[i + 1] - y[i];
+                        var Y2 = y[i + 2] - y[i];
+                        vec[i] = X1 * Y2 - Y1 * X2;
 
-                if (vec[i] > 0)
-                {
-                    counterclockwise++;
+                        if (vec[i] > 0)
+                        {
+                            counterclockwise++;
+                        }
+                        else if (vec[i] < 0)
+                        {
+                            clockwise++;
+                        }
+                    }
                 }
-                else if (vec[i] < 0)
+                else if (show_num != 0 && start_num == 0)
                 {
-                    clockwise++;
+                    for (int i = start_num; i < start_num + show_num - 1; i++)
+                    {
+                        var X1 = x[i + 1] - x[i];
+                        var X2 = x[i + 2] - x[i];
+                        var Y1 = y[i + 1] - y[i];
+                        var Y2 = y[i + 2] - y[i];
+                        vec[i] = X1 * Y2 - Y1 * X2;
+
+                        if (vec[i] > 0)
+                        {
+                            counterclockwise++;
+                        }
+                        else if (vec[i] < 0)
+                        {
+                            clockwise++;
+                        }
+                    }
                 }
                 else
                 {
+                    for (int i = 0; i < count; i++)
+                    {
+                        var X1 = x[i + 1] - x[i];
+                        var X2 = x[i + 2] - x[i];
+                        var Y1 = y[i + 1] - y[i];
+                        var Y2 = y[i + 2] - y[i];
+                        vec[i] = X1 * Y2 - Y1 * X2;
 
+                        if (vec[i] > 0)
+                        {
+                            counterclockwise++;
+                        }
+                        else if (vec[i] < 0)
+                        {
+                            clockwise++;
+                        }
+                    }
                 }
             }
+            else
+            {
+                if (show_num != 0 && start_num != 0)
+                {
+                    for (int i = start_num - 1; i < count; i++)
+                    {
+                        var X1 = x[i + 1] - x[i];
+                        var X2 = x[i + 2] - x[i];
+                        var Y1 = y[i + 1] - y[i];
+                        var Y2 = y[i + 2] - y[i];
+                        vec[i] = X1 * Y2 - Y1 * X2;
 
+                        if (vec[i] > 0)
+                        {
+                            counterclockwise++;
+                        }
+                        else if (vec[i] < 0)
+                        {
+                            clockwise++;
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < count; i++)
+                    {
+                        var X1 = x[i + 1] - x[i];
+                        var X2 = x[i + 2] - x[i];
+                        var Y1 = y[i + 1] - y[i];
+                        var Y2 = y[i + 2] - y[i];
+                        vec[i] = X1 * Y2 - Y1 * X2;
+
+                        if (vec[i] > 0)
+                        {
+                            counterclockwise++;
+                        }
+                        else if (vec[i] < 0)
+                        {
+                            clockwise++;
+                        }
+                    }
+                }
+
+            }
             Data.VecInfo vecInfo = new Data.VecInfo
             {
                 clockwise = clockwise,
@@ -165,18 +250,18 @@ namespace animalsTrack
         }
 
         //傳順時針
-        public string Clockwise(List<Data.Coordinates> data, int userSelectID)
+        public string Clockwise(List<Data.Coordinates> data, int userSelectID, int show_num, int start_num)
         {
-            var vect = XYVector(data, userSelectID);
+            var vect = XYVector(data, userSelectID, show_num, start_num);
             var clockwise = vect.Item1.clockwise;
 
             return clockwise.ToString();
         }
 
         //傳逆時針
-        public string Counterclockwise(List<Data.Coordinates> data, int userSelectID)
+        public string Counterclockwise(List<Data.Coordinates> data, int userSelectID, int show_num, int start_num)
         {
-            var vect = XYVector(data, userSelectID);
+            var vect = XYVector(data, userSelectID, show_num, start_num);
             var counterclockwise = vect.Item1.counterclockwise;
 
             return counterclockwise.ToString();
@@ -195,7 +280,7 @@ namespace animalsTrack
         }
 
         //改變顯示數量
-        public void ChangeShowNumber(List<Data.Coordinates> data, int userSelectID, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p, int num)
+        public void ChangeShowNumber(List<Data.Coordinates> data, int userSelectID, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p, int show_num)
         {
             SelectXAxis(data, userSelectID);
             SelectYAxis(data, userSelectID);
@@ -218,7 +303,7 @@ namespace animalsTrack
 
             g.DrawLine(pen_r, 2 * (float)x[0], 2 * (float)y[0], 2 * (float)x[1], 2 * (float)y[1]);
 
-            for (int j = 1; j < num - 1; j++)
+            for (int j = 1; j < show_num - 1; j++)
             {
                 x_axis1 = (float)x[j];
                 y_axis1 = (float)y[j];
@@ -257,14 +342,29 @@ namespace animalsTrack
             {
                 g.DrawLine(pen_r, 2 * (float)x[start_num - 1], 2 * (float)y[start_num - 1], 2 * (float)x[start_num], 2 * (float)y[start_num]);
 
-                for (int j = start_num; j < start_num + show_num - 2; j++)
+                if (start_num + show_num - 2 <= count)
                 {
-                    x_axis1 = (float)x[j];
-                    y_axis1 = (float)y[j];
-                    x_axis2 = (float)x[j + 1];
-                    y_axis2 = (float)y[j + 1];
+                    for (int j = start_num; j < start_num + show_num - 2; j++)
+                    {
+                        x_axis1 = (float)x[j];
+                        y_axis1 = (float)y[j];
+                        x_axis2 = (float)x[j + 1];
+                        y_axis2 = (float)y[j + 1];
 
-                    g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
+                        g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
+                    }
+                }
+                else
+                {
+                    for (int j = start_num; j < count; j++)
+                    {
+                        x_axis1 = (float)x[j];
+                        y_axis1 = (float)y[j];
+                        x_axis2 = (float)x[j + 1];
+                        y_axis2 = (float)y[j + 1];
+
+                        g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
+                    }
                 }
                 g.Dispose();
                 p.Image = bmp;

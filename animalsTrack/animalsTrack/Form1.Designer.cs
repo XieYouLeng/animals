@@ -262,9 +262,9 @@
             // 
             this.Btn_changePC.BackColor = System.Drawing.SystemColors.Control;
             this.Btn_changePC.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Btn_changePC.Location = new System.Drawing.Point(889, 496);
+            this.Btn_changePC.Location = new System.Drawing.Point(890, 495);
             this.Btn_changePC.Name = "Btn_changePC";
-            this.Btn_changePC.Size = new System.Drawing.Size(128, 34);
+            this.Btn_changePC.Size = new System.Drawing.Size(130, 35);
             this.Btn_changePC.TabIndex = 23;
             this.Btn_changePC.Text = "切換PC端模式";
             this.Btn_changePC.UseVisualStyleBackColor = false;
@@ -297,7 +297,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Dtp_dateTime);
             this.Name = "Form1";
-            this.Text = "可彈性擴充之動物行為量測系統-動物實驗結果";
+            this.Text = "可彈性擴充之動物行為量測系統-遠端模式-動物實驗結果";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Pic_track)).EndInit();
             this.ResumeLayout(false);
