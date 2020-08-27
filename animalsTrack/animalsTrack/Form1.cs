@@ -110,10 +110,14 @@ namespace animalsTrack
         private void Tb_selectNumber_TextChanged(object sender, EventArgs e)
         {
             int.TryParse(Tb_selectNumber.Text, out show_num);
-            if (show_num != 0)
+            if (show_num != 0 && show_num <= webFunction.Int_DataBaseNumber())
             {
                 webFunction.ChangeShowNumber(result, ID, g, bmp, brush, Pic_track, show_num);
                 Lbl_showNumber.Text = "共" + Tb_selectNumber.Text +"筆";
+            }
+            else if (show_num > webFunction.Int_DataBaseNumber())
+            {
+                MessageBox.Show("您輸入的筆數大於資料庫內的筆數，總筆數為" + webFunction.Int_DataBaseNumber() + "筆，請重新輸入！");
             }
             else
             {
