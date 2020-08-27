@@ -22,7 +22,7 @@ namespace animalsTrack
         private float x_axis2;
         private float y_axis2;
 
-        public Tuple<Data.AsixInfo> GetAxis(List<Data.Coordinates> data, int userSelectID)
+        public Tuple<Data.AsixInfo> GetAxis(List<Data.Coordinates> data, int userSelectID, int show_num, int start_num)
         {
             id = new int[data.Count];
             x = new double[data.Count];
@@ -31,18 +31,51 @@ namespace animalsTrack
             count = 0;
 
             //取出ID相符的X軸、Y軸座標和Z軸的值
-            for (int i = 0; i < data.Count; i++)
+            if (show_num == 0 && start_num == 0)
             {
-                id[i] = data[i].ID;
-
-                if (userSelectID == id[i])
+                for (int i = 0; i < data.Count; i++)
                 {
-                    x[count] = data[i].X_axis;
-                    y[count] = data[i].Y_axis;
-                    z[count] = data[i].Z_axis;
-                    count++;
+                    id[i] = data[i].ID;
+
+                    if (userSelectID == id[i])
+                    {
+                        x[count] = data[i].X_axis;
+                        y[count] = data[i].Y_axis;
+                        z[count] = data[i].Z_axis;
+                        count++;
+                    }
                 }
-             }
+            }
+            else if (show_num != 0 | start_num == 0)
+            {
+                for (int i = 0; i < show_num - 1; i++)
+                {
+                    id[i] = data[i].ID;
+
+                    if (userSelectID == id[i])
+                    {
+                        x[count] = data[i].X_axis;
+                        y[count] = data[i].Y_axis;
+                        z[count] = data[i].Z_axis;
+                        count++;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = start_num - 1; i < show_num - 1; i++)
+                {
+                    id[i] = data[i].ID;
+
+                    if (userSelectID == id[i])
+                    {
+                        x[count] = data[i].X_axis;
+                        y[count] = data[i].Y_axis;
+                        z[count] = data[i].Z_axis;
+                        count++;
+                    }
+                }
+            }
 
             Data.AsixInfo asixInfo = new Data.AsixInfo
             {
@@ -54,27 +87,27 @@ namespace animalsTrack
         }
 
         //篩選後的X軸
-        public double[] SelectXAxis(List<Data.Coordinates> data, int userSelectID)
+        public double[] SelectXAxis(List<Data.Coordinates> data, int userSelectID, int show_num, int start_num)
         {
-            var axis = GetAxis(data, userSelectID);
+            var axis = GetAxis(data, userSelectID, show_num, start_num);
             var x = axis.Item1.x_axis;
 
             return x;
         }
 
         //篩選後的Y軸
-        public double[] SelectYAxis(List<Data.Coordinates> data, int userSelectID)
+        public double[] SelectYAxis(List<Data.Coordinates> data, int userSelectID, int show_num, int start_num)
         {
-            var axis = GetAxis(data, userSelectID);
+            var axis = GetAxis(data, userSelectID, show_num, start_num);
             var y = axis.Item1.y_axis;
 
             return y;
         }
 
         //計算垂直活動
-        public string CountZAxis(List<Data.Coordinates> data, int userSelectID)
+        public string CountZAxis(List<Data.Coordinates> data, int userSelectID, int show_num, int start_num)
         {
-            var axis = GetAxis(data, userSelectID);
+            var axis = GetAxis(data, userSelectID, show_num, start_num);
             var z = axis.Item1.z_axis;
             int count_z = 0;
 
@@ -89,10 +122,10 @@ namespace animalsTrack
         }
 
         //畫圖
-        public void DrawLine(List<Data.Coordinates> data, int userSelectID, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p)
+        public void DrawLine(List<Data.Coordinates> data, int userSelectID, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p, int show_num, int start_num)
         {
-            SelectXAxis(data, userSelectID);
-            SelectYAxis(data, userSelectID);
+            SelectXAxis(data, userSelectID, show_num, start_num);
+            SelectYAxis(data, userSelectID, show_num, start_num);
 
             Pen pen_b = new Pen(Color.Black, 1);
             Pen pen_r = new Pen(Color.Red, 1);
@@ -131,8 +164,8 @@ namespace animalsTrack
             double[] vec = new double[count];
             int clockwise = 0;
             int counterclockwise = 0;
-            SelectXAxis(data, userSelectID);
-            SelectYAxis(data, userSelectID);
+            SelectXAxis(data, userSelectID, show_num, start_num);
+            SelectYAxis(data, userSelectID, show_num, start_num);
 
             if (show_num + start_num <= count)
             {
@@ -280,10 +313,10 @@ namespace animalsTrack
         }
 
         //改變顯示數量
-        public void ChangeShowNumber(List<Data.Coordinates> data, int userSelectID, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p, int show_num)
+        public void ChangeShowNumber(List<Data.Coordinates> data, int userSelectID, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p, int show_num, int start_num)
         {
-            SelectXAxis(data, userSelectID);
-            SelectYAxis(data, userSelectID);
+            SelectXAxis(data, userSelectID, show_num, start_num);
+            SelectYAxis(data, userSelectID, show_num, start_num);
 
             Pen pen_b = new Pen(Color.Black, 1);
             Pen pen_r = new Pen(Color.Red, 1);
@@ -319,8 +352,8 @@ namespace animalsTrack
         //改變起始值
         public void ChangeStartNumber(List<Data.Coordinates> data, int userSelectID, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p, int show_num, int start_num)
         {
-            SelectXAxis(data, userSelectID);
-            SelectYAxis(data, userSelectID);
+            SelectXAxis(data, userSelectID, show_num, start_num);
+            SelectYAxis(data, userSelectID, show_num, start_num);
 
             Pen pen_b = new Pen(Color.Black, 1);
             Pen pen_r = new Pen(Color.Red, 1);
@@ -371,7 +404,7 @@ namespace animalsTrack
             }
             else
             {
-                DrawLine(data, userSelectID, g, bmp, b, p);
+                DrawLine(data, userSelectID, g, bmp, b, p, show_num, start_num);
             }
         }
     }

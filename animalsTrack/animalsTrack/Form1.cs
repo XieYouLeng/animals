@@ -65,9 +65,9 @@ namespace animalsTrack
             int.TryParse(userSelectID, out ID);
             show_num = webFunction.Int_DataBaseNumber();
 
-            webFunction.DrawLine(result, ID, g, bmp, brush, Pic_track);
+            webFunction.DrawLine(result, ID, g, bmp, brush, Pic_track, show_num, start_num);
             Lbl_showNumber.Text = "共" + webFunction.Str_DataBaseNumber() + "筆";
-            Lbl_verticalActivity.Text = webFunction.CountZAxis(result, ID) + "次";
+            Lbl_verticalActivity.Text = webFunction.CountZAxis(result, ID, show_num, start_num) + "次";
             Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";
             Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";
         }
@@ -113,7 +113,7 @@ namespace animalsTrack
             int.TryParse(Tb_selectNumber.Text, out show_num);
             if (show_num != 0 && show_num <= webFunction.Int_DataBaseNumber())
             {
-                webFunction.ChangeShowNumber(result, ID, g, bmp, brush, Pic_track, show_num);
+                webFunction.ChangeShowNumber(result, ID, g, bmp, brush, Pic_track, show_num, start_num);
                 Lbl_showNumber.Text = "共" + Tb_selectNumber.Text + "筆";
                 Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";
                 Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";
@@ -124,7 +124,7 @@ namespace animalsTrack
             }
             else
             {
-                webFunction.DrawLine(result, ID, g, bmp, brush, Pic_track);
+                webFunction.DrawLine(result, ID, g, bmp, brush, Pic_track, show_num, start_num);
                 Lbl_showNumber.Text = "共" + webFunction.Int_DataBaseNumber() + "筆";
                 Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";
                 Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";
