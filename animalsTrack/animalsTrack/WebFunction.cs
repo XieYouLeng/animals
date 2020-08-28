@@ -167,7 +167,7 @@ namespace animalsTrack
             SelectXAxis(data, userSelectID, show_num, start_num);
             SelectYAxis(data, userSelectID, show_num, start_num);
 
-            if (show_num + start_num <= count)
+            if (show_num + start_num <= count && count - start_num > show_num)
             {
                 if (show_num != 0 && start_num != 0)
                 {
@@ -229,6 +229,70 @@ namespace animalsTrack
                         }
                     }
                 }
+            }
+            else if (show_num + start_num <= count && count - start_num == show_num)
+            {
+                if (show_num != 0 && start_num != 0)
+                {
+                    for (int i = start_num - 1; i < start_num + show_num - 3; i++)
+                    {
+                        var X1 = x[i + 1] - x[i];
+                        var X2 = x[i + 2] - x[i];
+                        var Y1 = y[i + 1] - y[i];
+                        var Y2 = y[i + 2] - y[i];
+                        vec[i] = X1 * Y2 - Y1 * X2;
+
+                        if (vec[i] > 0)
+                        {
+                            counterclockwise++;
+                        }
+                        else if (vec[i] < 0)
+                        {
+                            clockwise++;
+                        }
+                    }
+                }
+                else if (show_num != 0 && start_num == 0)
+                {
+                    for (int i = start_num; i < start_num + show_num - 2; i++)
+                    {
+                        var X1 = x[i + 1] - x[i];
+                        var X2 = x[i + 2] - x[i];
+                        var Y1 = y[i + 1] - y[i];
+                        var Y2 = y[i + 2] - y[i];
+                        vec[i] = X1 * Y2 - Y1 * X2;
+
+                        if (vec[i] > 0)
+                        {
+                            counterclockwise++;
+                        }
+                        else if (vec[i] < 0)
+                        {
+                            clockwise++;
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < count; i++)
+                    {
+                        var X1 = x[i + 1] - x[i];
+                        var X2 = x[i + 2] - x[i];
+                        var Y1 = y[i + 1] - y[i];
+                        var Y2 = y[i + 2] - y[i];
+                        vec[i] = X1 * Y2 - Y1 * X2;
+
+                        if (vec[i] > 0)
+                        {
+                            counterclockwise++;
+                        }
+                        else if (vec[i] < 0)
+                        {
+                            clockwise++;
+                        }
+                    }
+                }
+
             }
             else
             {
