@@ -18,13 +18,15 @@ namespace animalsTrack
             public int Z_axis { get; set; }
         }
 
-        public class AsixInfo
+        //比對相符資料的格式
+        public class AxisInfo
         {
             public double[] x_axis { get; set; }
             public double[] y_axis { get; set; }
             public int[] z_axis { get; set; }
         }
 
+        //順、逆時針的格式
         public class VecInfo
         {
             public int clockwise { get; set; }

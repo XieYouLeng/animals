@@ -18,7 +18,7 @@ namespace animalsTrack
         DataBase dataBase = new DataBase();
         WebFunction webFunction = new WebFunction();
         Form2 form2 = new Form2();
-        private int[] id;
+        private int[] id;   //放經過時間過濾後的ID
         private int ID = 0;
         private int show_num = 0;
         private int start_num = 0;
@@ -46,11 +46,12 @@ namespace animalsTrack
             String dateTime = Dtp_dateTime.Value.ToString("yyyy-MM-dd");
             result = dataBase.GetSelectData(dateTime);
 
-            id = new int[result.Count];
+            id = new int[result.Count];     //創一個跟資料庫裡的資料一樣大小的陣列
+            //抓出有資料的ID
             for (int i = 0; i < result.Count; i++)
             {
                 id[i] = result[i].ID;
-                //防止重複ID
+                //防止下拉式選單出現重複ID
                 if (Cbo_selectID.Items.Contains(id[i]) != true)
                 {
                     Cbo_selectID.Items.Add(id[i]);
@@ -61,47 +62,18 @@ namespace animalsTrack
         //選擇ID抓出相符的資料
         private void Cbo_selectID_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string userSelectID = this.Cbo_selectID.Text;
-            int.TryParse(userSelectID, out ID);
-            show_num = webFunction.Int_DataBaseNumber();
+            string userSelectID = this.Cbo_selectID.Text;       //抓使用者選了哪個ID
+            int.TryParse(userSelectID, out ID);     //轉型態
+            show_num = webFunction.Int_DataBaseNumber();        //初始數值跟資料庫的資料一樣
 
-            webFunction.DrawLine(result, ID, g, bmp, brush, Pic_track, show_num, start_num);
-            Lbl_showNumber.Text = "共" + webFunction.Str_DataBaseNumber() + "筆";
-            Lbl_verticalActivity.Text = webFunction.CountZAxis(result, ID, show_num, start_num) + "次";
-            Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";
-            Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";
+            webFunction.DrawLine(result, ID, g, bmp, brush, Pic_track);        //畫圖
+            Lbl_showStartNumber.Text = "從第1筆開始";        //顯示從第1筆開始
+            Lbl_showNumber.Text = "共" + webFunction.Str_DataBaseNumber() + "筆";     //顯示目前共有幾筆資料
+            Lbl_verticalActivity.Text = webFunction.CountZAxis(result, ID) + "次";    //計算垂直動作
+            Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";      //順時針
+            Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";      //逆時針
         }
 
-        //void chart1_MouseMove(object sender, MouseEventArgs e)
-        //{
-        //    var pos = e.Location;
-        //    if (prevPosition.HasValue && pos == prevPosition.Value)
-        //        return;
-        //    tooltip.RemoveAll();
-        //    prevPosition = pos;
-        //    var results = Pic_track.HitTest(pos.X, pos.Y, false,
-        //                                    ChartElementType.DataPoint);
-        //    foreach (var result in results)
-        //    {
-        //        if (result.ChartElementType == ChartElementType.DataPoint)
-        //        {
-        //            var prop = result.Object as DataPoint;
-        //            if (prop != null)
-        //            {
-        //                var pointXPixel = result.ChartArea.AxisX.ValueToPixelPosition(prop.XValue);
-        //                var pointYPixel = result.ChartArea.AxisY.ValueToPixelPosition(prop.YValues[0]);
-
-        //                //check if the cursor is really close to the point(2 pixels around)
-        //                if (Math.Abs(pos.X - pointXPixel) < 2 &&
-        //                    Math.Abs(pos.Y - pointYPixel) < 2)
-        //                {
-        //                    tooltip.Show("X=" + prop.XValue + ", Y=" + prop.YValues[0], this.Pic_track,
-        //                                    pos.X, pos.Y - 15);
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -110,21 +82,21 @@ namespace animalsTrack
         //取出selectNumber的數值，改變顯示數量
         private void Tb_selectNumber_TextChanged(object sender, EventArgs e)
         {
-            int.TryParse(Tb_selectNumber.Text, out show_num);
-            if (show_num != 0 && show_num <= webFunction.Int_DataBaseNumber())
+            int.TryParse(Tb_selectNumber.Text, out show_num);       //取出使用者輸入的顯示筆數量
+            if (show_num != 0 && show_num <= webFunction.Int_DataBaseNumber())      //顯示筆數有值且小於資料庫筆數
             {
-                webFunction.ChangeShowNumber(result, ID, g, bmp, brush, Pic_track, show_num, start_num);
-                Lbl_showNumber.Text = "共" + Tb_selectNumber.Text + "筆";
-                Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";
-                Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";
+                webFunction.DL_ChangeShowNumber(result, ID, g, bmp, brush, Pic_track, show_num, start_num);        //畫出有限制筆數的圖
+                Lbl_showNumber.Text = "共" + Tb_selectNumber.Text + "筆";         //顯示筆數
+                Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";         //顯示輸入限制筆數後順時針次數
+                Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";        //顯示輸入限制筆數後逆時針次數
             }
-            else if (show_num > webFunction.Int_DataBaseNumber())
+            else if (show_num > webFunction.Int_DataBaseNumber())       //當限制筆數大於總筆數
             {
                 MessageBox.Show("您輸入的筆數大於資料庫內的筆數，總筆數為" + webFunction.Int_DataBaseNumber() + "筆，請重新輸入！");
             }
-            else
+            else       //處理當顯示筆數為0的情況
             {
-                webFunction.DrawLine(result, ID, g, bmp, brush, Pic_track, show_num, start_num);
+                webFunction.DrawLine(result, ID, g, bmp, brush, Pic_track);
                 Lbl_showNumber.Text = "共" + webFunction.Int_DataBaseNumber() + "筆";
                 Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";
                 Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";
@@ -136,19 +108,23 @@ namespace animalsTrack
         private void Tb_startNumber_TextChanged(object sender, EventArgs e)
         {
             int.TryParse(Tb_startNumber.Text, out start_num);
-            if (start_num != 0)
+            if (show_num != 0 && start_num != 0)
             {
-                webFunction.ChangeStartNumber(result, ID, g, bmp, brush, Pic_track, show_num, start_num);
-                Lbl_showStartNumber.Text = "從第" + Tb_startNumber.Text + "筆開始";
-                Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";
-                Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";
+                webFunction.DL_ChangeStartNumber(result, ID, g, bmp, brush, Pic_track, show_num, start_num);        //畫出有限制起始值的圖
+                Lbl_showStartNumber.Text = "從第" + Tb_startNumber.Text + "筆開始";      //顯示從第幾筆開始
+                Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";      //有限制起始點的順時針
+                Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";        //有限制起始點的逆時針
             }
-            else
+            else if (show_num == 0 && start_num != 0)
+            {
+                webFunction.DL_ChangeStartNumber(result, ID, g, bmp, brush, Pic_track, show_num, start_num);        //無限制顯示數量，但限制起始值
+            }
+            else       //無限制起始值
             {
                 Tb_selectNumber_TextChanged(sender, e);
                 Lbl_showStartNumber.Text = "從第1筆開始";
-                Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";
-                Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";
+                //Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";
+                //Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";
             }
         }
 

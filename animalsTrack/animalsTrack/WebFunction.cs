@@ -22,7 +22,7 @@ namespace animalsTrack
         private float x_axis2;
         private float y_axis2;
 
-        public Tuple<Data.AsixInfo> GetAxis(List<Data.Coordinates> data, int userSelectID, int show_num, int start_num)
+        public Tuple<Data.AxisInfo> GetAxis(List<Data.Coordinates> data, int userSelectID)
         {
             id = new int[data.Count];
             x = new double[data.Count];
@@ -31,85 +31,52 @@ namespace animalsTrack
             count = 0;
 
             //取出ID相符的X軸、Y軸座標和Z軸的值
-            if (show_num == 0 && start_num == 0)
+            for (int i = 0; i < data.Count; i++)
             {
-                for (int i = 0; i < data.Count; i++)
-                {
-                    id[i] = data[i].ID;
+                id[i] = data[i].ID;
 
-                    if (userSelectID == id[i])
-                    {
-                        x[count] = data[i].X_axis;
-                        y[count] = data[i].Y_axis;
-                        z[count] = data[i].Z_axis;
-                        count++;
-                    }
-                }
-            }
-            else if (show_num != 0 | start_num == 0)
-            {
-                for (int i = 0; i < show_num - 1; i++)
+                if (userSelectID == id[i])
                 {
-                    id[i] = data[i].ID;
-
-                    if (userSelectID == id[i])
-                    {
-                        x[count] = data[i].X_axis;
-                        y[count] = data[i].Y_axis;
-                        z[count] = data[i].Z_axis;
-                        count++;
-                    }
-                }
-            }
-            else
-            {
-                for (int i = start_num - 1; i < show_num - 1; i++)
-                {
-                    id[i] = data[i].ID;
-
-                    if (userSelectID == id[i])
-                    {
-                        x[count] = data[i].X_axis;
-                        y[count] = data[i].Y_axis;
-                        z[count] = data[i].Z_axis;
-                        count++;
-                    }
+                    x[count] = data[i].X_axis;
+                    y[count] = data[i].Y_axis;
+                    z[count] = data[i].Z_axis;
+                    count++;
                 }
             }
 
-            Data.AsixInfo asixInfo = new Data.AsixInfo
+            Data.AxisInfo asixInfo = new Data.AxisInfo
             {
                 x_axis = x,
                 y_axis = y,
                 z_axis = z,
             };
-            return new Tuple<Data.AsixInfo>(asixInfo);
+            return new Tuple<Data.AxisInfo>(asixInfo);
         }
 
         //篩選後的X軸
-        public double[] SelectXAxis(List<Data.Coordinates> data, int userSelectID, int show_num, int start_num)
+        public double[] SelectXAxis(List<Data.Coordinates> data, int userSelectID)
         {
-            var axis = GetAxis(data, userSelectID, show_num, start_num);
+            var axis = GetAxis(data, userSelectID);
             var x = axis.Item1.x_axis;
 
             return x;
         }
 
         //篩選後的Y軸
-        public double[] SelectYAxis(List<Data.Coordinates> data, int userSelectID, int show_num, int start_num)
+        public double[] SelectYAxis(List<Data.Coordinates> data, int userSelectID)
         {
-            var axis = GetAxis(data, userSelectID, show_num, start_num);
+            var axis = GetAxis(data, userSelectID);
             var y = axis.Item1.y_axis;
 
             return y;
         }
 
         //計算垂直活動
-        public string CountZAxis(List<Data.Coordinates> data, int userSelectID, int show_num, int start_num)
+        public string CountZAxis(List<Data.Coordinates> data, int userSelectID)
         {
-            var axis = GetAxis(data, userSelectID, show_num, start_num);
-            var z = axis.Item1.z_axis;
-            int count_z = 0;
+            var axis = GetAxis(data, userSelectID);
+            var z = axis.Item1.z_axis;      //抓出Z軸資料
+            int count_z = 0;    //計算1的次數
 
             for (int i = 0; i < count; i++)
             {
@@ -122,10 +89,10 @@ namespace animalsTrack
         }
 
         //畫圖
-        public void DrawLine(List<Data.Coordinates> data, int userSelectID, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p, int show_num, int start_num)
+        public void DrawLine(List<Data.Coordinates> data, int userSelectID, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p)
         {
-            SelectXAxis(data, userSelectID, show_num, start_num);
-            SelectYAxis(data, userSelectID, show_num, start_num);
+            SelectXAxis(data, userSelectID);
+            SelectYAxis(data, userSelectID);
 
             Pen pen_b = new Pen(Color.Black, 1);
             Pen pen_r = new Pen(Color.Red, 1);
@@ -145,12 +112,12 @@ namespace animalsTrack
 
             g.DrawLine(pen_r, 2 * (float)x[0], 2 * (float)y[0], 2 * (float)x[1], 2 * (float)y[1]);
 
-            for (int j = 1; j < count - 1; j++)
+            for (int i = 1; i < count - 1; i++)
             {
-                x_axis1 = (float)x[j];
-                y_axis1 = (float)y[j];
-                x_axis2 = (float)x[j + 1];
-                y_axis2 = (float)y[j + 1];
+                x_axis1 = (float)x[i];
+                y_axis1 = (float)y[i];
+                x_axis2 = (float)x[i + 1];
+                y_axis2 = (float)y[i + 1];
 
                 g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
             }
@@ -161,183 +128,113 @@ namespace animalsTrack
         //計算向量
         public Tuple<Data.VecInfo> XYVector(List<Data.Coordinates> data, int userSelectID, int show_num, int start_num)
         {
-            double[] vec = new double[count];
-            int clockwise = 0;
-            int counterclockwise = 0;
-            SelectXAxis(data, userSelectID, show_num, start_num);
-            SelectYAxis(data, userSelectID, show_num, start_num);
+            double[] vec = new double[count];   //創建一個陣列存放向量
+            int clockwise = 0;      //順時針
+            int counterclockwise = 0;       //逆時針
+            SelectXAxis(data, userSelectID);
+            SelectYAxis(data, userSelectID);
 
-            if (show_num + start_num <= count && count - start_num > show_num)
+            if (show_num == count && start_num == 0)    //只做到篩選ID，顯示全部資料，初始值為第一筆開始
             {
-                if (show_num != 0 && start_num != 0)
+                for (int i = 0; i < count - 1; i++)
                 {
-                    for (int i = start_num - 1; i < start_num + show_num - 2; i++)
-                    {
-                        var X1 = x[i + 1] - x[i];
-                        var X2 = x[i + 2] - x[i];
-                        var Y1 = y[i + 1] - y[i];
-                        var Y2 = y[i + 2] - y[i];
-                        vec[i] = X1 * Y2 - Y1 * X2;
+                    var X1 = x[i + 1] - x[i];
+                    var X2 = x[i + 2] - x[i];
+                    var Y1 = y[i + 1] - y[i];
+                    var Y2 = y[i + 2] - y[i];
+                    vec[i] = X1 * Y2 - Y1 * X2;
 
-                        if (vec[i] > 0)
-                        {
-                            counterclockwise++;
-                        }
-                        else if (vec[i] < 0)
-                        {
-                            clockwise++;
-                        }
+                    if (vec[i] > 0)
+                    {
+                        counterclockwise++;
                     }
-                }
-                else if (show_num != 0 && start_num == 0)
-                {
-                    for (int i = start_num; i < start_num + show_num - 1; i++)
+                    else if (vec[i] < 0)
                     {
-                        var X1 = x[i + 1] - x[i];
-                        var X2 = x[i + 2] - x[i];
-                        var Y1 = y[i + 1] - y[i];
-                        var Y2 = y[i + 2] - y[i];
-                        vec[i] = X1 * Y2 - Y1 * X2;
-
-                        if (vec[i] > 0)
-                        {
-                            counterclockwise++;
-                        }
-                        else if (vec[i] < 0)
-                        {
-                            clockwise++;
-                        }
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < count; i++)
-                    {
-                        var X1 = x[i + 1] - x[i];
-                        var X2 = x[i + 2] - x[i];
-                        var Y1 = y[i + 1] - y[i];
-                        var Y2 = y[i + 2] - y[i];
-                        vec[i] = X1 * Y2 - Y1 * X2;
-
-                        if (vec[i] > 0)
-                        {
-                            counterclockwise++;
-                        }
-                        else if (vec[i] < 0)
-                        {
-                            clockwise++;
-                        }
+                        clockwise++;
                     }
                 }
             }
-            else if (show_num + start_num <= count && count - start_num == show_num)
+            else if (show_num != 0 && start_num == 0)     //顯示筆數不為0，起始值為初始
             {
-                if (show_num != 0 && start_num != 0)
+                for (int i = 0; i < show_num - 1; i++)
                 {
-                    for (int i = start_num - 1; i < start_num + show_num - 3; i++)
-                    {
-                        var X1 = x[i + 1] - x[i];
-                        var X2 = x[i + 2] - x[i];
-                        var Y1 = y[i + 1] - y[i];
-                        var Y2 = y[i + 2] - y[i];
-                        vec[i] = X1 * Y2 - Y1 * X2;
+                    var X1 = x[i + 1] - x[i];
+                    var X2 = x[i + 2] - x[i];
+                    var Y1 = y[i + 1] - y[i];
+                    var Y2 = y[i + 2] - y[i];
+                    vec[i] = X1 * Y2 - Y1 * X2;
 
-                        if (vec[i] > 0)
-                        {
-                            counterclockwise++;
-                        }
-                        else if (vec[i] < 0)
-                        {
-                            clockwise++;
-                        }
+                    if (vec[i] > 0)
+                    {
+                        counterclockwise++;
+                    }
+                    else if (vec[i] < 0)
+                    {
+                        clockwise++;
                     }
                 }
-                else if (show_num != 0 && start_num == 0)
-                {
-                    for (int i = start_num; i < start_num + show_num - 2; i++)
-                    {
-                        var X1 = x[i + 1] - x[i];
-                        var X2 = x[i + 2] - x[i];
-                        var Y1 = y[i + 1] - y[i];
-                        var Y2 = y[i + 2] - y[i];
-                        vec[i] = X1 * Y2 - Y1 * X2;
-
-                        if (vec[i] > 0)
-                        {
-                            counterclockwise++;
-                        }
-                        else if (vec[i] < 0)
-                        {
-                            clockwise++;
-                        }
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < count; i++)
-                    {
-                        var X1 = x[i + 1] - x[i];
-                        var X2 = x[i + 2] - x[i];
-                        var Y1 = y[i + 1] - y[i];
-                        var Y2 = y[i + 2] - y[i];
-                        vec[i] = X1 * Y2 - Y1 * X2;
-
-                        if (vec[i] > 0)
-                        {
-                            counterclockwise++;
-                        }
-                        else if (vec[i] < 0)
-                        {
-                            clockwise++;
-                        }
-                    }
-                }
-
             }
-            else
+            else if (show_num == 0)
             {
-                if (show_num != 0 && start_num != 0)
+                for (int i = 0; i < count; i++)
                 {
-                    for (int i = start_num - 1; i < count; i++)
-                    {
-                        var X1 = x[i + 1] - x[i];
-                        var X2 = x[i + 2] - x[i];
-                        var Y1 = y[i + 1] - y[i];
-                        var Y2 = y[i + 2] - y[i];
-                        vec[i] = X1 * Y2 - Y1 * X2;
+                    var X1 = x[i + 1] - x[i];
+                    var X2 = x[i + 2] - x[i];
+                    var Y1 = y[i + 1] - y[i];
+                    var Y2 = y[i + 2] - y[i];
+                    vec[i] = X1 * Y2 - Y1 * X2;
 
-                        if (vec[i] > 0)
-                        {
-                            counterclockwise++;
-                        }
-                        else if (vec[i] < 0)
-                        {
-                            clockwise++;
-                        }
+                    if (vec[i] > 0)
+                    {
+                        counterclockwise++;
+                    }
+                    else if (vec[i] < 0)
+                    {
+                        clockwise++;
                     }
                 }
-                else
-                {
-                    for (int i = 0; i < count; i++)
-                    {
-                        var X1 = x[i + 1] - x[i];
-                        var X2 = x[i + 2] - x[i];
-                        var Y1 = y[i + 1] - y[i];
-                        var Y2 = y[i + 2] - y[i];
-                        vec[i] = X1 * Y2 - Y1 * X2;
-
-                        if (vec[i] > 0)
-                        {
-                            counterclockwise++;
-                        }
-                        else if (vec[i] < 0)
-                        {
-                            clockwise++;
-                        }
-                    }
-                }
-
             }
+            else if (show_num != 0 && start_num != 0)
+            {
+                for (int i = start_num - 1; i < start_num + show_num - 2; i++)
+                {
+                    var X1 = x[i + 1] - x[i];
+                    var X2 = x[i + 2] - x[i];
+                    var Y1 = y[i + 1] - y[i];
+                    var Y2 = y[i + 2] - y[i];
+                    vec[i] = X1 * Y2 - Y1 * X2;
+
+                    if (vec[i] > 0)
+                    {
+                        counterclockwise++;
+                    }
+                    else if (vec[i] < 0)
+                    {
+                        clockwise++;
+                    }
+                }
+            }
+            else if (show_num == 0 && start_num != 0)
+            {
+                for (int i = start_num - 1; i < count - 1; i++)
+                {
+                    var X1 = x[i + 1] - x[i];
+                    var X2 = x[i + 2] - x[i];
+                    var Y1 = y[i + 1] - y[i];
+                    var Y2 = y[i + 2] - y[i];
+                    vec[i] = X1 * Y2 - Y1 * X2;
+
+                    if (vec[i] > 0)
+                    {
+                        counterclockwise++;
+                    }
+                    else if (vec[i] < 0)
+                    {
+                        clockwise++;
+                    }
+                }
+            }
+
             Data.VecInfo vecInfo = new Data.VecInfo
             {
                 clockwise = clockwise,
@@ -377,10 +274,10 @@ namespace animalsTrack
         }
 
         //改變顯示數量
-        public void ChangeShowNumber(List<Data.Coordinates> data, int userSelectID, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p, int show_num, int start_num)
+        public void DL_ChangeShowNumber(List<Data.Coordinates> data, int userSelectID, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p, int show_num, int start_num)
         {
-            SelectXAxis(data, userSelectID, show_num, start_num);
-            SelectYAxis(data, userSelectID, show_num, start_num);
+            SelectXAxis(data, userSelectID);
+            SelectYAxis(data, userSelectID);
 
             Pen pen_b = new Pen(Color.Black, 1);
             Pen pen_r = new Pen(Color.Red, 1);
@@ -400,12 +297,12 @@ namespace animalsTrack
 
             g.DrawLine(pen_r, 2 * (float)x[0], 2 * (float)y[0], 2 * (float)x[1], 2 * (float)y[1]);
 
-            for (int j = 1; j < show_num - 1; j++)
+            for (int i = 1; i < show_num - 1; i++)
             {
-                x_axis1 = (float)x[j];
-                y_axis1 = (float)y[j];
-                x_axis2 = (float)x[j + 1];
-                y_axis2 = (float)y[j + 1];
+                x_axis1 = (float)x[i];
+                y_axis1 = (float)y[i];
+                x_axis2 = (float)x[i + 1];
+                y_axis2 = (float)y[i + 1];
 
                 g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
             }
@@ -414,10 +311,10 @@ namespace animalsTrack
         }
 
         //改變起始值
-        public void ChangeStartNumber(List<Data.Coordinates> data, int userSelectID, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p, int show_num, int start_num)
+        public void DL_ChangeStartNumber(List<Data.Coordinates> data, int userSelectID, Graphics g, Bitmap bmp, SolidBrush b, PictureBox p, int show_num, int start_num)
         {
-            SelectXAxis(data, userSelectID, show_num, start_num);
-            SelectYAxis(data, userSelectID, show_num, start_num);
+            SelectXAxis(data, userSelectID);
+            SelectYAxis(data, userSelectID);
 
             Pen pen_b = new Pen(Color.Black, 1);
             Pen pen_r = new Pen(Color.Red, 1);
@@ -435,40 +332,35 @@ namespace animalsTrack
 
             g.Clear(Color.White);
 
-            if (start_num > 0)
+            if (start_num != 0)
             {
                 g.DrawLine(pen_r, 2 * (float)x[start_num - 1], 2 * (float)y[start_num - 1], 2 * (float)x[start_num], 2 * (float)y[start_num]);
-
-                if (start_num + show_num - 2 <= count)
+                for (int i = start_num; i < start_num + show_num - 2; i++)
                 {
-                    for (int j = start_num; j < start_num + show_num - 2; j++)
-                    {
-                        x_axis1 = (float)x[j];
-                        y_axis1 = (float)y[j];
-                        x_axis2 = (float)x[j + 1];
-                        y_axis2 = (float)y[j + 1];
+                    x_axis1 = (float)x[i];
+                    y_axis1 = (float)y[i];
+                    x_axis2 = (float)x[i + 1];
+                    y_axis2 = (float)y[i + 1];
 
-                        g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
-                    }
+                    g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
                 }
-                else
+            }
+            else if (show_num == 0 && start_num != 0)
+            {
+                g.DrawLine(pen_r, 2 * (float)x[start_num - 1], 2 * (float)y[start_num - 1], 2 * (float)x[start_num], 2 * (float)y[start_num]);
+                for (int i = start_num; i < count - start_num + 1; i++)
                 {
-                    for (int j = start_num; j < count; j++)
-                    {
-                        x_axis1 = (float)x[j];
-                        y_axis1 = (float)y[j];
-                        x_axis2 = (float)x[j + 1];
-                        y_axis2 = (float)y[j + 1];
+                    x_axis1 = (float)x[i];
+                    y_axis1 = (float)y[i];
+                    x_axis2 = (float)x[i + 1];
+                    y_axis2 = (float)y[i + 1];
 
-                        g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
-                    }
+                    g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
                 }
-                g.Dispose();
-                p.Image = bmp;
             }
             else
             {
-                DrawLine(data, userSelectID, g, bmp, b, p, show_num, start_num);
+                DrawLine(data, userSelectID, g, bmp, b, p);
             }
         }
     }
