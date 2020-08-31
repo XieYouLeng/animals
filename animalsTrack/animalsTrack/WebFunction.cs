@@ -136,7 +136,7 @@ namespace animalsTrack
 
             if (show_num == count && start_num == 0)    //只做到篩選ID，顯示全部資料，初始值為第一筆開始
             {
-                for (int i = 0; i < count - 1; i++)
+                for (int i = 0; i < count - 3; i++)
                 {
                     var X1 = x[i + 1] - x[i];
                     var X2 = x[i + 2] - x[i];
@@ -156,7 +156,7 @@ namespace animalsTrack
             }
             else if (show_num != 0 && start_num == 0)     //顯示筆數不為0，起始值為初始
             {
-                for (int i = 0; i < show_num - 1; i++)
+                for (int i = 0; i < show_num - 3; i++)
                 {
                     var X1 = x[i + 1] - x[i];
                     var X2 = x[i + 2] - x[i];
@@ -174,49 +174,73 @@ namespace animalsTrack
                     }
                 }
             }
-            else if (show_num == 0)
-            {
-                for (int i = 0; i < count; i++)
-                {
-                    var X1 = x[i + 1] - x[i];
-                    var X2 = x[i + 2] - x[i];
-                    var Y1 = y[i + 1] - y[i];
-                    var Y2 = y[i + 2] - y[i];
-                    vec[i] = X1 * Y2 - Y1 * X2;
+            //else if (show_num == 0)     //無限制顯示筆數
+            //{
+            //    for (int i = 0; i < count - 3; i++)
+            //    {
+            //        var X1 = x[i + 1] - x[i];
+            //        var X2 = x[i + 2] - x[i];
+            //        var Y1 = y[i + 1] - y[i];
+            //        var Y2 = y[i + 2] - y[i];
+            //        vec[i] = X1 * Y2 - Y1 * X2;
 
-                    if (vec[i] > 0)
+            //        if (vec[i] > 0)
+            //        {
+            //            counterclockwise++;
+            //        }
+            //        else if (vec[i] < 0)
+            //        {
+            //            clockwise++;
+            //        }
+            //    }
+            //}
+            else if (show_num != 0 && start_num != 0)       //顯示筆數不為0，起始不為初始值
+            {
+                if (start_num + show_num - 1 <= count)      //在資料筆數內
+                {
+                    for (int i = start_num - 1; i < start_num + show_num - 3; i++)
                     {
-                        counterclockwise++;
-                    }
-                    else if (vec[i] < 0)
-                    {
-                        clockwise++;
+                        var X1 = x[i + 1] - x[i];
+                        var X2 = x[i + 2] - x[i];
+                        var Y1 = y[i + 1] - y[i];
+                        var Y2 = y[i + 2] - y[i];
+                        vec[i] = X1 * Y2 - Y1 * X2;
+
+                        if (vec[i] > 0)
+                        {
+                            counterclockwise++;
+                        }
+                        else if (vec[i] < 0)
+                        {
+                            clockwise++;
+                        }
                     }
                 }
-            }
-            else if (show_num != 0 && start_num != 0)
-            {
-                for (int i = start_num - 1; i < start_num + show_num - 2; i++)
+                else       //在資料筆數外
                 {
-                    var X1 = x[i + 1] - x[i];
-                    var X2 = x[i + 2] - x[i];
-                    var Y1 = y[i + 1] - y[i];
-                    var Y2 = y[i + 2] - y[i];
-                    vec[i] = X1 * Y2 - Y1 * X2;
+                    for (int i = start_num - 1; i < count - 3; i++)
+                    {
+                        var X1 = x[i + 1] - x[i];
+                        var X2 = x[i + 2] - x[i];
+                        var Y1 = y[i + 1] - y[i];
+                        var Y2 = y[i + 2] - y[i];
+                        vec[i] = X1 * Y2 - Y1 * X2;
 
-                    if (vec[i] > 0)
-                    {
-                        counterclockwise++;
+                        if (vec[i] > 0)
+                        {
+                            counterclockwise++;
+                        }
+                        else if (vec[i] < 0)
+                        {
+                            clockwise++;
+                        }
                     }
-                    else if (vec[i] < 0)
-                    {
-                        clockwise++;
-                    }
+
                 }
             }
-            else if (show_num == 0 && start_num != 0)
+            else if (show_num == 0 && start_num != 0)      //無限制筆數，限制起始值
             {
-                for (int i = start_num - 1; i < count - 1; i++)
+                for (int i = start_num - 1; i < count - 3; i++)
                 {
                     var X1 = x[i + 1] - x[i];
                     var X2 = x[i + 2] - x[i];
@@ -332,10 +356,10 @@ namespace animalsTrack
 
             g.Clear(Color.White);
 
-            if (start_num != 0)
+            if (show_num == 0 && start_num != 0)        //只限制起始值
             {
                 g.DrawLine(pen_r, 2 * (float)x[start_num - 1], 2 * (float)y[start_num - 1], 2 * (float)x[start_num], 2 * (float)y[start_num]);
-                for (int i = start_num; i < start_num + show_num - 2; i++)
+                for (int i = start_num - 1; i < count - start_num; i++)
                 {
                     x_axis1 = (float)x[i];
                     y_axis1 = (float)y[i];
@@ -345,23 +369,41 @@ namespace animalsTrack
                     g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
                 }
             }
-            else if (show_num == 0 && start_num != 0)
+            else if (start_num != 0)
             {
-                g.DrawLine(pen_r, 2 * (float)x[start_num - 1], 2 * (float)y[start_num - 1], 2 * (float)x[start_num], 2 * (float)y[start_num]);
-                for (int i = start_num; i < count - start_num + 1; i++)
+                if (start_num + show_num - 1 <= count)      //顯示筆數在資料範圍內
                 {
-                    x_axis1 = (float)x[i];
-                    y_axis1 = (float)y[i];
-                    x_axis2 = (float)x[i + 1];
-                    y_axis2 = (float)y[i + 1];
+                    g.DrawLine(pen_r, 2 * (float)x[start_num - 1], 2 * (float)y[start_num - 1], 2 * (float)x[start_num], 2 * (float)y[start_num]);
+                    for (int i = start_num - 1; i < start_num + show_num - 3; i++)
+                    {
+                        x_axis1 = (float)x[i];
+                        y_axis1 = (float)y[i];
+                        x_axis2 = (float)x[i + 1];
+                        y_axis2 = (float)y[i + 1];
 
-                    g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
+                        g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
+                    }
+                }
+                else       //顯示筆數在資料範圍外
+                {
+                    g.DrawLine(pen_r, 2 * (float)x[start_num - 1], 2 * (float)y[start_num - 1], 2 * (float)x[start_num], 2 * (float)y[start_num]);
+                    for (int i = start_num; i < count - 1; i++)
+                    {
+                        x_axis1 = (float)x[i];
+                        y_axis1 = (float)y[i];
+                        x_axis2 = (float)x[i + 1];
+                        y_axis2 = (float)y[i + 1];
+
+                        g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
+                    }
                 }
             }
-            else
+            else       //起始值為0
             {
                 DrawLine(data, userSelectID, g, bmp, b, p);
             }
+            g.Dispose();
+            p.Image = bmp;
         }
     }
 }

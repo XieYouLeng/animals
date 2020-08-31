@@ -26,13 +26,10 @@ namespace animalsTrack
         Bitmap bmp;
         Graphics g;
         SolidBrush brush;
-        Point? prevPosition = null;
-        ToolTip tooltip = new ToolTip();
 
         public Form1()
         {
             InitializeComponent();
-            this.tooltip.AutomaticDelay = 10;
             //處理DateTimePicker會有預設值的問題
             String dateTime = Dtp_dateTime.Value.ToString("yyyy-MM-dd");
             result = dataBase.GetSelectData(dateTime);
@@ -64,19 +61,20 @@ namespace animalsTrack
         {
             string userSelectID = this.Cbo_selectID.Text;       //抓使用者選了哪個ID
             int.TryParse(userSelectID, out ID);     //轉型態
-            show_num = webFunction.Int_DataBaseNumber();        //初始數值跟資料庫的資料一樣
 
             webFunction.DrawLine(result, ID, g, bmp, brush, Pic_track);        //畫圖
+            show_num = webFunction.Int_DataBaseNumber();        //初始數值跟資料庫的資料一樣
             Lbl_showStartNumber.Text = "從第1筆開始";        //顯示從第1筆開始
             Lbl_showNumber.Text = "共" + webFunction.Str_DataBaseNumber() + "筆";     //顯示目前共有幾筆資料
             Lbl_verticalActivity.Text = webFunction.CountZAxis(result, ID) + "次";    //計算垂直動作
             Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";      //順時針
             Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";      //逆時針
+            show_num = 0;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         //取出selectNumber的數值，改變顯示數量
@@ -108,23 +106,53 @@ namespace animalsTrack
         private void Tb_startNumber_TextChanged(object sender, EventArgs e)
         {
             int.TryParse(Tb_startNumber.Text, out start_num);
+            int db_count = webFunction.Int_DataBaseNumber();
+            int count = db_count - start_num + 1;
+            //int count_num = start_num + show_num - 1;
+            //int num = db_count - count_num;
+            int a = start_num - 1 + show_num;
             if (show_num != 0 && start_num != 0)
             {
-                webFunction.DL_ChangeStartNumber(result, ID, g, bmp, brush, Pic_track, show_num, start_num);        //畫出有限制起始值的圖
-                Lbl_showStartNumber.Text = "從第" + Tb_startNumber.Text + "筆開始";      //顯示從第幾筆開始
-                Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";      //有限制起始點的順時針
-                Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";        //有限制起始點的逆時針
+                if (start_num > webFunction.Int_DataBaseNumber())
+                {
+                    MessageBox.Show("您輸入的筆數大於資料庫內的筆數，總筆數為" + webFunction.Int_DataBaseNumber() + "筆，請重新輸入！");
+                }
+                else
+                { 
+                    webFunction.DL_ChangeStartNumber(result, ID, g, bmp, brush, Pic_track, show_num, start_num);        //畫出有限制起始值的圖
+                    if (a <= webFunction.Int_DataBaseNumber())
+                    {
+                        Lbl_showNumber.Text = "共" + show_num + "筆";
+                    }
+                    else
+                    {
+                        Lbl_showNumber.Text = "共" + count + "筆";
+                    }
+                    Lbl_showStartNumber.Text = "從第" + Tb_startNumber.Text + "筆開始";      //顯示從第幾筆開始
+                    Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";      //有限制起始點的順時針
+                    Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";        //有限制起始點的逆時針
+                }
             }
-            else if (show_num == 0 && start_num != 0)
+            else if (show_num == 0 && start_num != 0)       //只限制起始點
             {
-                webFunction.DL_ChangeStartNumber(result, ID, g, bmp, brush, Pic_track, show_num, start_num);        //無限制顯示數量，但限制起始值
+                if (start_num > webFunction.Int_DataBaseNumber())
+                {
+                    MessageBox.Show("您輸入的筆數大於資料庫內的筆數，總筆數為" + webFunction.Int_DataBaseNumber() + "筆，請重新輸入！");
+                }
+                else
+                {
+                    webFunction.DL_ChangeStartNumber(result, ID, g, bmp, brush, Pic_track, show_num, start_num);        //畫出有限制起始值的圖
+                    Lbl_showNumber.Text = "共" + count + "筆";
+                    Lbl_showStartNumber.Text = "從第" + Tb_startNumber.Text + "筆開始";      //顯示從第幾筆開始
+                    Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";      //有限制起始點的順時針
+                    Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";        //有限制起始點的逆時針
+                }
+
             }
             else       //無限制起始值
             {
                 Tb_selectNumber_TextChanged(sender, e);
                 Lbl_showStartNumber.Text = "從第1筆開始";
-                //Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";
-                //Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";
             }
         }
 
