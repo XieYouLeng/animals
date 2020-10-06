@@ -108,8 +108,6 @@ namespace animalsTrack
             int.TryParse(Tb_startNumber.Text, out start_num);
             int db_count = webFunction.Int_DataBaseNumber();
             int count = db_count - start_num + 1;
-            //int count_num = start_num + show_num - 1;
-            //int num = db_count - count_num;
             int a = start_num - 1 + show_num;
             if (show_num != 0 && start_num != 0)
             {

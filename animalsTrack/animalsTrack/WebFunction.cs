@@ -174,26 +174,26 @@ namespace animalsTrack
                     }
                 }
             }
-            //else if (show_num == 0)     //無限制顯示筆數
-            //{
-            //    for (int i = 0; i < count - 3; i++)
-            //    {
-            //        var X1 = x[i + 1] - x[i];
-            //        var X2 = x[i + 2] - x[i];
-            //        var Y1 = y[i + 1] - y[i];
-            //        var Y2 = y[i + 2] - y[i];
-            //        vec[i] = X1 * Y2 - Y1 * X2;
+            else if (show_num == 0)     //無限制顯示筆數
+            {
+                for (int i = 0; i < count - 3; i++)
+                {
+                    var X1 = x[i + 1] - x[i];
+                    var X2 = x[i + 2] - x[i];
+                    var Y1 = y[i + 1] - y[i];
+                    var Y2 = y[i + 2] - y[i];
+                    vec[i] = X1 * Y2 - Y1 * X2;
 
-            //        if (vec[i] > 0)
-            //        {
-            //            counterclockwise++;
-            //        }
-            //        else if (vec[i] < 0)
-            //        {
-            //            clockwise++;
-            //        }
-            //    }
-            //}
+                    if (vec[i] > 0)
+                    {
+                        counterclockwise++;
+                    }
+                    else if (vec[i] < 0)
+                    {
+                        clockwise++;
+                    }
+                }
+            }
             else if (show_num != 0 && start_num != 0)       //顯示筆數不為0，起始不為初始值
             {
                 if (start_num + show_num - 1 <= count)      //在資料筆數內
@@ -359,7 +359,7 @@ namespace animalsTrack
             if (show_num == 0 && start_num != 0)        //只限制起始值
             {
                 g.DrawLine(pen_r, 2 * (float)x[start_num - 1], 2 * (float)y[start_num - 1], 2 * (float)x[start_num], 2 * (float)y[start_num]);
-                for (int i = start_num - 1; i < count - start_num; i++)
+                for (int i = start_num; i < count - start_num; i++)
                 {
                     x_axis1 = (float)x[i];
                     y_axis1 = (float)y[i];
@@ -374,7 +374,7 @@ namespace animalsTrack
                 if (start_num + show_num - 1 <= count)      //顯示筆數在資料範圍內
                 {
                     g.DrawLine(pen_r, 2 * (float)x[start_num - 1], 2 * (float)y[start_num - 1], 2 * (float)x[start_num], 2 * (float)y[start_num]);
-                    for (int i = start_num - 1; i < start_num + show_num - 3; i++)
+                    for (int i = start_num; i < start_num + show_num - 3; i++)
                     {
                         x_axis1 = (float)x[i];
                         y_axis1 = (float)y[i];
