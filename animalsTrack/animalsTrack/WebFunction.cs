@@ -110,7 +110,7 @@ namespace animalsTrack
 
             g.Clear(Color.White);
 
-            g.DrawLine(pen_r, 2 * (float)x[0], 2 * (float)y[0], 2 * (float)x[1], 2 * (float)y[1]);
+            g.DrawLine(pen_r, 4 * (float)x[0], 4 * (float)y[0], 4 * (float)x[1], 4 * (float)y[1]);
 
             for (int i = 1; i < count - 1; i++)
             {
@@ -119,7 +119,7 @@ namespace animalsTrack
                 x_axis2 = (float)x[i + 1];
                 y_axis2 = (float)y[i + 1];
 
-                g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
+                g.DrawLine(pen_b, 4 * x_axis1, 4 * y_axis1, 4 * x_axis2, 4 * y_axis2);
             }
             g.Dispose();
             p.Image = bmp;
@@ -319,7 +319,7 @@ namespace animalsTrack
 
             g.Clear(Color.White);
 
-            g.DrawLine(pen_r, 2 * (float)x[0], 2 * (float)y[0], 2 * (float)x[1], 2 * (float)y[1]);
+            g.DrawLine(pen_r, 4 * (float)x[0], 4 * (float)y[0], 4 * (float)x[1], 4 * (float)y[1]);
 
             for (int i = 1; i < show_num - 1; i++)
             {
@@ -328,7 +328,7 @@ namespace animalsTrack
                 x_axis2 = (float)x[i + 1];
                 y_axis2 = (float)y[i + 1];
 
-                g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
+                g.DrawLine(pen_b, 4 * x_axis1, 4 * y_axis1, 4 * x_axis2, 4 * y_axis2);
             }
             g.Dispose();
             p.Image = bmp;
@@ -358,7 +358,7 @@ namespace animalsTrack
 
             if (show_num == 0 && start_num != 0)        //只限制起始值
             {
-                g.DrawLine(pen_r, 2 * (float)x[start_num - 1], 2 * (float)y[start_num - 1], 2 * (float)x[start_num], 2 * (float)y[start_num]);
+                g.DrawLine(pen_r, 4 * (float)x[start_num - 1], 4 * (float)y[start_num - 1], 4 * (float)x[start_num], 4 * (float)y[start_num]);
                 for (int i = start_num; i < count - start_num; i++)
                 {
                     x_axis1 = (float)x[i];
@@ -366,14 +366,14 @@ namespace animalsTrack
                     x_axis2 = (float)x[i + 1];
                     y_axis2 = (float)y[i + 1];
 
-                    g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
+                    g.DrawLine(pen_b, 4 * x_axis1, 4 * y_axis1, 4 * x_axis2, 4 * y_axis2);
                 }
             }
             else if (start_num != 0)
             {
                 if (start_num + show_num - 1 <= count)      //顯示筆數在資料範圍內
                 {
-                    g.DrawLine(pen_r, 2 * (float)x[start_num - 1], 2 * (float)y[start_num - 1], 2 * (float)x[start_num], 2 * (float)y[start_num]);
+                    g.DrawLine(pen_r, 4 * (float)x[start_num - 1], 4 * (float)y[start_num - 1], 4 * (float)x[start_num], 4 * (float)y[start_num]);
                     for (int i = start_num; i < start_num + show_num - 3; i++)
                     {
                         x_axis1 = (float)x[i];
@@ -381,12 +381,12 @@ namespace animalsTrack
                         x_axis2 = (float)x[i + 1];
                         y_axis2 = (float)y[i + 1];
 
-                        g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
+                        g.DrawLine(pen_b, 4 * x_axis1, 4 * y_axis1, 4 * x_axis2, 4 * y_axis2);
                     }
                 }
                 else       //顯示筆數在資料範圍外
                 {
-                    g.DrawLine(pen_r, 2 * (float)x[start_num - 1], 2 * (float)y[start_num - 1], 2 * (float)x[start_num], 2 * (float)y[start_num]);
+                    g.DrawLine(pen_r, 4 * (float)x[start_num - 1], 4 * (float)y[start_num - 1], 4 * (float)x[start_num], 4 * (float)y[start_num]);
                     for (int i = start_num; i < count - 1; i++)
                     {
                         x_axis1 = (float)x[i];
@@ -394,7 +394,7 @@ namespace animalsTrack
                         x_axis2 = (float)x[i + 1];
                         y_axis2 = (float)y[i + 1];
 
-                        g.DrawLine(pen_b, 2 * x_axis1, 2 * y_axis1, 2 * x_axis2, 2 * y_axis2);
+                        g.DrawLine(pen_b, 4 * x_axis1, 4 * y_axis1, 4 * x_axis2, 4 * y_axis2);
                     }
                 }
             }

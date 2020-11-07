@@ -99,7 +99,6 @@ namespace animalsTrack
                 Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";
                 Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";
             }
-
         }
 
         //取出startNumber的數值，改變起始值
@@ -145,7 +144,6 @@ namespace animalsTrack
                     Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";      //有限制起始點的順時針
                     Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";        //有限制起始點的逆時針
                 }
-
             }
             else       //無限制起始值
             {
