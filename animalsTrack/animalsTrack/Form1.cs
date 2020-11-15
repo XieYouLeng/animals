@@ -59,7 +59,7 @@ namespace animalsTrack
         //選擇ID抓出相符的資料
         private void Cbo_selectID_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string userSelectID = this.Cbo_selectID.Text;       //抓使用者選了哪個ID
+            string userSelectID = Cbo_selectID.Text;       //抓使用者選了哪個ID
             int.TryParse(userSelectID, out ID);     //轉型態
 
             webFunction.DrawLine(result, ID, g, bmp, brush, Pic_track);        //畫圖
