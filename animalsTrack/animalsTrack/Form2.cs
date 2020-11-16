@@ -22,6 +22,9 @@ namespace animalsTrack
         //private int totalLength = 0;
         //delegate void Display(byte[] buffer);
         bool rs232Key;
+        private bool Console_receiving = false;
+        private Thread t;
+        delegate void Display(string buffer);
 
         private void Form2_Load(object sender, EventArgs e)
         {
@@ -51,7 +54,7 @@ namespace animalsTrack
             catch (Exception ex)
             {
                 comport.Dispose();
-                textBox1.AppendText(ex.Message);
+                textBox4.AppendText(ex.Message);
             }
         }
 
@@ -75,10 +78,23 @@ namespace animalsTrack
                 this.comport.DataBits = 8;               // data bits = 8
 
                 // 設定 PORT 接收事件
-                comport.DataReceived += new SerialDataReceivedEventHandler(SerialPort_DataReceived);
+                //comport.DataReceived += new SerialDataReceivedEventHandler(SerialPort_DataReceived);
 
                 // 打開 PORT
-                comport.Open();
+                //comport.Open();
+
+                if (!comport.IsOpen)
+                {
+                    //開啟 Serial Port
+                    comport.Open();
+
+                    Console_receiving = true;
+
+                    //開啟執行續做接收動作
+                    t = new Thread(DoReceive);
+                    t.IsBackground = true;
+                    t.Start();
+                }
 
                 // 清空 serial port 的緩存
                 comport.DiscardInBuffer();       // RX
@@ -100,26 +116,70 @@ namespace animalsTrack
                 rs232Key = true;
             }
         }
-        void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+
+        private void DoReceive()
         {
-            byte RB = Byte.Parse(comport.ReadByte().ToString());
-            //SetText(RB.ToString());
-            SetText(textBox4.Text + RB.ToString() + " ");
+            Byte[] buffer = new Byte[1024];
+
+            try
+            {
+                while (Console_receiving)
+                {
+                    if (comport.BytesToRead > 0)
+                    {
+                        Int32 length = comport.Read(buffer, 0, buffer.Length);
+
+                        string buf = Encoding.ASCII.GetString(buffer);
+
+                        Array.Resize(ref buffer, length);
+                        Display d = new Display(ConsoleShow);
+                        this.Invoke(d, new Object[] { buf });
+                        Array.Resize(ref buffer, 1024);
+                    }
+
+                    Thread.Sleep(200);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        delegate void SetTextCallback(string text);
-        private void SetText(string text)
+        delegate void SetTextCallback(string buffer);
+        public void ConsoleShow(string buffer)
         {
             if (this.textBox4.InvokeRequired)
             {
-                SetTextCallback d = new SetTextCallback(SetText);
-                this.Invoke(d, new object[] { text });
+                SetTextCallback d = new SetTextCallback(ConsoleShow);
+                this.Invoke(d, new object[] { buffer });
             }
             else
             {
-                this.textBox4.Text = text;
+                this.textBox4.Text = buffer;
             }
         }
+
+        //void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        //{
+        //    byte RB = Byte.Parse(comport.ReadByte().ToString());
+        //    //SetText(RB.ToString());
+        //    SetText(textBox4.Text + RB.ToString() + " ");
+        //}
+
+        //delegate void SetTextCallback(string text);
+        //private void SetText(string text)
+        //{
+        //    if (this.textBox4.InvokeRequired)
+        //    {
+        //        SetTextCallback d = new SetTextCallback(SetText);
+        //        this.Invoke(d, new object[] { text });
+        //    }
+        //    else
+        //    {
+        //        this.textBox4.Text = text;
+        //    }
+        //}
 
         //private void comport_DataReceived(Object sender, SerialDataReceivedEventArgs e)
         //{
