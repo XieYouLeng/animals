@@ -79,7 +79,7 @@
             this.Pic_track.Location = new System.Drawing.Point(20, 20);
             this.Pic_track.Margin = new System.Windows.Forms.Padding(2);
             this.Pic_track.Name = "Pic_track";
-            this.Pic_track.Size = new System.Drawing.Size(510, 510);
+            this.Pic_track.Size = new System.Drawing.Size(520, 520);
             this.Pic_track.TabIndex = 6;
             this.Pic_track.TabStop = false;
             // 
