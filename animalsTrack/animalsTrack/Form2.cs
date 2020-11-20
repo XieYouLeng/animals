@@ -25,11 +25,18 @@ namespace animalsTrack
         private bool Console_receiving = false;
         private Thread t;
         delegate void Display(string buffer);
+        DataTable data = new DataTable();
+        PCFunction pcFunction = new PCFunction();
+        Bitmap bmp;
+        Graphics g;
+        SolidBrush brush;
+
 
         private void Form2_Load(object sender, EventArgs e)
         {
             try
             {
+                DataTable_init();
                 this.button1.Text = "Open COM";
 
                 this.button1.Click += new EventHandler(Rs232PortDoor);
@@ -65,7 +72,7 @@ namespace animalsTrack
                 this.button1.Text = "Close Port";
 
                 // 設定使用的 PORT
-                this.comport.PortName = "COM5";
+                this.comport.PortName = "COM7";
 
                 // 檢查 PORT 是否關閉
                 if (!comport.IsOpen)
@@ -89,6 +96,9 @@ namespace animalsTrack
                     comport.Open();
 
                     Console_receiving = true;
+
+                    if (comport.IsOpen)
+                        Console.WriteLine("open");
 
                     //開啟執行續做接收動作
                     t = new Thread(DoReceive);
@@ -121,28 +131,44 @@ namespace animalsTrack
         {
             Byte[] buffer = new Byte[1024];
 
-            try
+            while (Console_receiving)
             {
-                while (Console_receiving)
+                if (comport.BytesToRead > 0)
                 {
-                    if (comport.BytesToRead > 0)
-                    {
-                        Int32 length = comport.Read(buffer, 0, buffer.Length);
+                    Int32 length = comport.Read(buffer, 0, buffer.Length);
 
+                    Console.WriteLine(buffer[length - 1]);
+
+                    if (buffer[0] == '!' && buffer[length - 1] == '!')
+                    {
                         string buf = Encoding.ASCII.GetString(buffer);
+                        string[] bArray = buf.Split(new char[2] { '!', ',' });
+
+
+                        DataRow row = data.NewRow();
+                        row["ID"] = bArray[1];
+                        row["Datetime"] = bArray[2];
+                        row["X"] = bArray[3];
+                        row["Y"] = bArray[4];
+                        row["Z"] = bArray[5];
+                        data.Rows.Add(row);
+
+                        Console.WriteLine("1");
+                        if (data.Rows.Count != 1)
+                        {
+                            Console.WriteLine("2");
+                            pcFunction.DrawLine(data, g, bmp, brush, Pic_track);
+                            Console.WriteLine("3");
+                        }
+
 
                         Array.Resize(ref buffer, length);
                         Display d = new Display(ConsoleShow);
                         this.Invoke(d, new Object[] { buf });
                         Array.Resize(ref buffer, 1024);
                     }
-
-                    Thread.Sleep(200);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                Thread.Sleep(200);
             }
         }
 
@@ -158,6 +184,18 @@ namespace animalsTrack
             {
                 this.textBox4.Text = buffer;
             }
+        }
+
+        public void DataTable_init()
+        {
+            data.Columns.Clear();
+            data.Clear();
+
+            data.Columns.Add("ID");
+            data.Columns.Add("Datetime");
+            data.Columns.Add("X");
+            data.Columns.Add("Y");
+            data.Columns.Add("Z");
         }
 
         //void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)

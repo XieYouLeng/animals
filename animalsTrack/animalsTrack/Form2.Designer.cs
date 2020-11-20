@@ -84,7 +84,7 @@
             this.textBox4.Location = new System.Drawing.Point(557, 20);
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(327, 510);
+            this.textBox4.Size = new System.Drawing.Size(296, 31);
             this.textBox4.TabIndex = 8;
             // 
             // Form2
