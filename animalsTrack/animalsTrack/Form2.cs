@@ -72,7 +72,7 @@ namespace animalsTrack
                 this.button1.Text = "Close Port";
 
                 // 設定使用的 PORT
-                this.comport.PortName = "COM7";
+                this.comport.PortName = "COM6";
 
                 // 檢查 PORT 是否關閉
                 if (!comport.IsOpen)
@@ -138,12 +138,12 @@ namespace animalsTrack
                     Int32 length = comport.Read(buffer, 0, buffer.Length);
 
                     Console.WriteLine(buffer[length - 1]);
+                    Console.WriteLine("2222");
 
                     if (buffer[0] == '!' && buffer[length - 1] == '!')
                     {
                         string buf = Encoding.ASCII.GetString(buffer);
                         string[] bArray = buf.Split(new char[2] { '!', ',' });
-
 
                         DataRow row = data.NewRow();
                         row["ID"] = bArray[1];
@@ -168,7 +168,7 @@ namespace animalsTrack
                         Array.Resize(ref buffer, 1024);
                     }
                 }
-                Thread.Sleep(200);
+                Thread.Sleep(50);
             }
         }
 
@@ -183,6 +183,11 @@ namespace animalsTrack
             else
             {
                 this.textBox4.Text = buffer;
+                Lbl_showStartTime.Text = (string)data.Rows[0]["DateTime"];
+                Lbl_showEndTime.Text = (string)data.Rows[data.Rows.Count - 1]["DateTime"];
+                Lbl_showVerAct.Text = pcFunction.CountZAxis(data);
+                Lbl_showClockwise.Text = pcFunction.Clockwise(data);
+                Lbl_showCounterClockwise.Text = pcFunction.Counterclockwise(data);
             }
         }
 
