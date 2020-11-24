@@ -39,6 +39,10 @@ namespace animalsTrack
                 DataTable_init();
                 this.button1.Text = "Open COM";
 
+                bmp = new Bitmap((int)Pic_track.Width, (int)Pic_track.Width);
+                g = Graphics.FromImage(bmp);
+                g.Clear(Color.White);
+                
                 this.button1.Click += new EventHandler(Rs232PortDoor);
 
                 rs232Key = true;
@@ -72,7 +76,7 @@ namespace animalsTrack
                 this.button1.Text = "Close Port";
 
                 // 設定使用的 PORT
-                this.comport.PortName = "COM6";
+                this.comport.PortName = "COM5";
 
                 // 檢查 PORT 是否關閉
                 if (!comport.IsOpen)
@@ -140,10 +144,10 @@ namespace animalsTrack
                     Console.WriteLine(buffer[length - 1]);
                     Console.WriteLine("2222");
 
-                    if (buffer[0] == '!' && buffer[length - 1] == '!')
+                    if (buffer[0] == '!' && buffer[length - 1] == ']')
                     {
                         string buf = Encoding.ASCII.GetString(buffer);
-                        string[] bArray = buf.Split(new char[2] { '!', ',' });
+                        string[] bArray = buf.Split(new char[3] { '!', ',', ']' });
 
                         DataRow row = data.NewRow();
                         row["ID"] = bArray[1];

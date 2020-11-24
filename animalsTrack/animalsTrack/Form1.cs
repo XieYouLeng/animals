@@ -67,8 +67,12 @@ namespace animalsTrack
             Lbl_showStartNumber.Text = "從第1筆開始";        //顯示從第1筆開始
             Lbl_showNumber.Text = "共" + webFunction.Str_DataBaseNumber() + "筆";     //顯示目前共有幾筆資料
             Lbl_verticalActivity.Text = webFunction.CountZAxis(result, ID) + "次";    //計算垂直動作
-            Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";      //順時針
-            Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";      //逆時針
+
+            Lbl_clockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";      //順時針
+            Lbl_counterclockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";      //逆時針
+
+            //Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";      //順時針
+            //Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";      //逆時針
             show_num = 0;
         }
 
@@ -85,8 +89,13 @@ namespace animalsTrack
             {
                 webFunction.DL_ChangeShowNumber(result, ID, g, bmp, brush, Pic_track, show_num, start_num);        //畫出有限制筆數的圖
                 Lbl_showNumber.Text = "共" + Tb_selectNumber.Text + "筆";         //顯示筆數
-                Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";         //顯示輸入限制筆數後順時針次數
-                Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";        //顯示輸入限制筆數後逆時針次數
+
+
+                Lbl_clockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";      //順時針
+                Lbl_counterclockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";      //逆時針
+
+                //Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";         //顯示輸入限制筆數後順時針次數
+                //Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";        //顯示輸入限制筆數後逆時針次數
             }
             else if (show_num > webFunction.Int_DataBaseNumber())       //當限制筆數大於總筆數
             {
@@ -96,8 +105,12 @@ namespace animalsTrack
             {
                 webFunction.DrawLine(result, ID, g, bmp, brush, Pic_track);
                 Lbl_showNumber.Text = "共" + webFunction.Int_DataBaseNumber() + "筆";
-                Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";
-                Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";
+
+                Lbl_clockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";      //順時針
+                Lbl_counterclockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";      //逆時針
+
+                //Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";
+                //Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";
             }
         }
 
@@ -126,8 +139,12 @@ namespace animalsTrack
                         Lbl_showNumber.Text = "共" + count + "筆";
                     }
                     Lbl_showStartNumber.Text = "從第" + Tb_startNumber.Text + "筆開始";      //顯示從第幾筆開始
-                    Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";      //有限制起始點的順時針
-                    Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";        //有限制起始點的逆時針
+
+                    Lbl_clockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";      //順時針
+                    Lbl_counterclockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";      //逆時針
+
+                    //Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";      //有限制起始點的順時針
+                    //Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";        //有限制起始點的逆時針
                 }
             }
             else if (show_num == 0 && start_num != 0)       //只限制起始點
@@ -141,8 +158,12 @@ namespace animalsTrack
                     webFunction.DL_ChangeStartNumber(result, ID, g, bmp, brush, Pic_track, show_num, start_num);        //畫出有限制起始值的圖
                     Lbl_showNumber.Text = "共" + count + "筆";
                     Lbl_showStartNumber.Text = "從第" + Tb_startNumber.Text + "筆開始";      //顯示從第幾筆開始
-                    Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";      //有限制起始點的順時針
-                    Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";        //有限制起始點的逆時針
+
+                    Lbl_clockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";      //順時針
+                    Lbl_counterclockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";      //逆時針
+
+                    //Lbl_clockwise.Text = webFunction.Clockwise(result, ID, show_num, start_num) + "次";      //有限制起始點的順時針
+                    //Lbl_counterclockwise.Text = webFunction.Counterclockwise(result, ID, show_num, start_num) + "次";        //有限制起始點的逆時針
                 }
             }
             else       //無限制起始值
