@@ -76,7 +76,7 @@ namespace animalsTrack
                 this.button1.Text = "Close Port";
 
                 // 設定使用的 PORT
-                this.comport.PortName = "COM5";
+                this.comport.PortName = "COM8";
 
                 // 檢查 PORT 是否關閉
                 if (!comport.IsOpen)
@@ -139,6 +139,7 @@ namespace animalsTrack
             {
                 if (comport.BytesToRead > 0)
                 {
+                    DateTime localDate = DateTime.Now;
                     Int32 length = comport.Read(buffer, 0, buffer.Length);
 
                     Console.WriteLine(buffer[length - 1]);
@@ -149,9 +150,10 @@ namespace animalsTrack
                         string buf = Encoding.ASCII.GetString(buffer);
                         string[] bArray = buf.Split(new char[3] { '!', ',', ']' });
 
+
                         DataRow row = data.NewRow();
                         row["ID"] = bArray[1];
-                        row["Datetime"] = bArray[2];
+                        row["Datetime"] = localDate;
                         row["X"] = bArray[3];
                         row["Y"] = bArray[4];
                         row["Z"] = bArray[5];
