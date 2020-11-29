@@ -45,6 +45,7 @@
             this.Lbl_showVerAct = new System.Windows.Forms.Label();
             this.Lbl_showClockwise = new System.Windows.Forms.Label();
             this.Lbl_showCounterClockwise = new System.Windows.Forms.Label();
+            this.Btn_saveCSV = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_track)).BeginInit();
             this.SuspendLayout();
             // 
@@ -202,11 +203,22 @@
             this.Lbl_showCounterClockwise.TabIndex = 13;
             this.Lbl_showCounterClockwise.Text = "...";
             // 
+            // Btn_saveCSV
+            // 
+            this.Btn_saveCSV.Location = new System.Drawing.Point(1064, 502);
+            this.Btn_saveCSV.Name = "Btn_saveCSV";
+            this.Btn_saveCSV.Size = new System.Drawing.Size(75, 23);
+            this.Btn_saveCSV.TabIndex = 14;
+            this.Btn_saveCSV.Text = "Save";
+            this.Btn_saveCSV.UseVisualStyleBackColor = true;
+            this.Btn_saveCSV.Click += new System.EventHandler(this.Btn_saveCSV_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 551);
+            this.Controls.Add(this.Btn_saveCSV);
             this.Controls.Add(this.Lbl_showCounterClockwise);
             this.Controls.Add(this.Lbl_showClockwise);
             this.Controls.Add(this.Lbl_showVerAct);
@@ -249,5 +261,6 @@
         private System.Windows.Forms.Label Lbl_showVerAct;
         private System.Windows.Forms.Label Lbl_showClockwise;
         private System.Windows.Forms.Label Lbl_showCounterClockwise;
+        private System.Windows.Forms.Button Btn_saveCSV;
     }
 }

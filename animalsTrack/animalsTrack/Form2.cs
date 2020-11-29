@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
 using System.Threading;
+using System.IO;
 
 namespace animalsTrack
 {
@@ -30,7 +31,7 @@ namespace animalsTrack
         Bitmap bmp;
         Graphics g;
         SolidBrush brush;
-
+        string strFilePath = @"C:\New folder\Data.csv";
 
         private void Form2_Load(object sender, EventArgs e)
         {
@@ -209,6 +210,53 @@ namespace animalsTrack
             data.Columns.Add("Z");
         }
 
+        public static bool SaveCSV(DataTable dt, string fullPath)
+        {
+            try
+            {
+                FileInfo fil = new FileInfo(fullPath);
+                if(!fil.Directory.Exists)
+                {
+                    fil.Directory.Create();
+                }
+                FileStream fs = new FileStream(fullPath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
+                StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8);
+                string data = "";
+
+                for (int i = 0; i < dt.Columns.Count; i++)
+                {
+                    data += "\"" + dt.Columns[i].ColumnName.ToString() + "\"";
+                    if(i < dt.Columns.Count - 1)
+                    {
+                        data += ",";
+                    }
+                }
+                sw.WriteLine(data);
+                for(int i = 0; i < dt.Rows.Count; i++)
+                {
+                    data = "";
+                    for(int j = 0; j < dt.Columns.Count; j++)
+                    {
+                        string str = dt.Rows[i][j].ToString();
+                        str = string.Format("\"{0}\"", str);
+                        data += str;
+                        if (j < dt.Columns.Count - 1)
+                        {
+                            data += ",";
+                        }
+                    }
+                    sw.WriteLine(data);
+                }
+                sw.Close();
+                fs.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         //void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         //{
         //    byte RB = Byte.Parse(comport.ReadByte().ToString());
@@ -255,6 +303,11 @@ namespace animalsTrack
         private void Btn_changeFar_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
+        }
+
+        private void Btn_saveCSV_Click(object sender, EventArgs e)
+        {
+            SaveCSV(data, strFilePath);
         }
     }
 }
